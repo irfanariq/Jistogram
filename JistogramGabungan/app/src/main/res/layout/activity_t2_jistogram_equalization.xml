@@ -39,6 +39,7 @@
                 android:layout_gravity="center_horizontal"/>
 
             <HorizontalScrollView
+                android:id="@+id/imagesScrollView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <LinearLayout
@@ -115,6 +116,217 @@
                 android:layout_height="wrap_content"
                 android:text="Grafik"
                 android:layout_gravity="center_horizontal"/>
+
+            <HorizontalScrollView
+                android:id="@+id/histogramsScrollView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/histogramHE"
+                        android:layout_width="500dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="After Histogram Equalization"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/redHistogramTitleHE"
+                            android:text="Red Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/redHistogramHE"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/greenHistogramTitleHE"
+                            android:text="Green Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/greenHistogramHE"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/blueHistogramTitleHE"
+                            android:text="Blue Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/blueHistogramHE"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/grayscaleHistogramTitleHE"
+                            android:text="Grayscale Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/grayscaleHistogramHE"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/histogramOld"
+                        android:layout_width="500dp"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="5dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="Histogram Before"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/redHistogramTitleOld"
+                            android:text="Red Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/redHistogramOld"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/greenHistogramTitleOld"
+                            android:text="Green Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/greenHistogramOld"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/blueHistogramTitleOld"
+                            android:text="Blue Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/blueHistogramOld"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/grayscaleHistogramTitleOld"
+                            android:text="Grayscale Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/grayscaleHistogramOld"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/histogramLs"
+                        android:layout_width="500dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:text="After Linear Stretching"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/redHistogramTitleLS"
+                            android:text="Red Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/redHistogramLS"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/greenHistogramTitleLS"
+                            android:text="Green Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/greenHistogramLS"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/blueHistogramTitleLS"
+                            android:text="Blue Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/blueHistogramLS"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                        <TextView
+                            android:id="@+id/grayscaleHistogramTitleLS"
+                            android:text="Grayscale Histogram"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/grayscaleHistogramLS"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp">
+                        </com.github.mikephil.charting.charts.LineChart>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
         </LinearLayout>
     </ScrollView>
 

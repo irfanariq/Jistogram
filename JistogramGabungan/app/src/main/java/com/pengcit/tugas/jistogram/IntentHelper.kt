@@ -19,12 +19,13 @@ object IntentHelper {
     fun showPictureDialog(activity: Activity) {
         val pictureDialog = AlertDialog.Builder(activity)
         pictureDialog.setTitle("Select Action")
-        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
+//        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
+        val pictureDialogItems = arrayOf("Select photo from gallery")
         pictureDialog.setItems(pictureDialogItems
         ) { dialog, which ->
             when (which) {
                 0 -> selectImageFromGallery(activity)
-                1 -> takePhotoFromCamera(activity)
+//                1 -> takePhotoFromCamera(activity)
             }
         }
         pictureDialog.show()
