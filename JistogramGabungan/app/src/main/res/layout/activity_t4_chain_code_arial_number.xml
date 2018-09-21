@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".T4ChainCodeArialNumber">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/selectImageBtn"
+                android:text="Select Image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/rawImage"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/oldImage"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="TODO" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/thresholdText"
+                        android:layout_width="30dp"
+                        android:layout_gravity="center"
+                        android:layout_height="match_parent" />
+                    <SeekBar
+                        android:id="@+id/thresholdSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="255"
+                        android:progress="110"
+                        android:min="0"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/blackWhiteImageBtn"
+                    android:text="Black White Image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/preprediction"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/blackWhiteImage"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="TODO" />
+
+                <Button
+                    android:id="@+id/recognizeBtn"
+                    android:text="Recognize"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/resultPrediction"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.jsibbold.zoomage.ZoomageView
+                    android:id="@+id/zoomagePrediction"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:zoomage_animateOnReset="true"
+                    app:zoomage_autoResetMode="UNDER"
+                    app:zoomage_autoCenter="true"
+                    app:zoomage_zoomable="true"
+                    app:zoomage_minScale="1"
+                    app:zoomage_maxScale="8"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

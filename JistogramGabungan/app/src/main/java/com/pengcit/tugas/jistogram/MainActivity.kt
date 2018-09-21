@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
     private val TUGAS_1 = 1
     private val TUGAS_2 = 2
     private val TUGAS_3 = 3
+    private val TUGAS_4 = 4
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
         tugas1Btn.setOnClickListener{ goToActivity(TUGAS_1) }
         tugas2Btn.setOnClickListener{ goToActivity(TUGAS_2) }
         tugas3Btn.setOnClickListener{ goToActivity(TUGAS_3) }
+        tugas4Btn.setOnClickListener{ goToActivity(TUGAS_4) }
     }
 
     private fun goToActivity(destination: Int) {
@@ -29,7 +31,10 @@ class MainActivity : AppCompatActivity() {
             intent = Intent(this, T2JistogramEqualization::class.java)
         } else if(destination == TUGAS_3) {
             intent = Intent(this, T3JistogramSpecification::class.java)
+        } else if(destination == TUGAS_4) {
+            intent = Intent(this, T4ChainCodeArialNumber::class.java)
         }
+
         if (intent != null){
             startActivity(intent)
         } else {

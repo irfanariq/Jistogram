@@ -11,21 +11,21 @@ import java.io.File
 
 object IntentHelper {
 
-    val GALLERY = 1
-    val CAMERA = 2
+    public val GALLERY = 1
+    public val CAMERA = 2
 
     var mImageUri : Uri? = null
 
     fun showPictureDialog(activity: Activity) {
         val pictureDialog = AlertDialog.Builder(activity)
         pictureDialog.setTitle("Select Action")
-//        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
-        val pictureDialogItems = arrayOf("Select photo from gallery")
+        val pictureDialogItems = arrayOf("Select photo from gallery", "Capture photo from camera")
+//        val pictureDialogItems = arrayOf("Select photo from gallery")
         pictureDialog.setItems(pictureDialogItems
         ) { dialog, which ->
             when (which) {
                 0 -> selectImageFromGallery(activity)
-//                1 -> takePhotoFromCamera(activity)
+                1 -> takePhotoFromCamera(activity)
             }
         }
         pictureDialog.show()
@@ -35,12 +35,12 @@ object IntentHelper {
 //        TODO()
     }
 
-    private fun takePhotoFromCamera(activity: Activity){
+    fun takePhotoFromCamera(activity: Activity){
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         var photo : File? = null
         try {
             photo = createTemporaryFile("picture", ".jpg");
-            photo.delete();
+//            photo.delete();
         }
         catch(e : Exception) {
             Log.v("Error", "Can't create file to take picture!")
@@ -51,7 +51,7 @@ object IntentHelper {
         activity.startActivityForResult(intent, CAMERA)
     }
 
-    private fun selectImageFromGallery(activity: Activity) {
+    fun selectImageFromGallery(activity: Activity) {
         val galleryIntent = Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
 

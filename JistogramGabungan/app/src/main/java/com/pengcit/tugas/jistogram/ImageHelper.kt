@@ -16,8 +16,8 @@ object ImageHelper {
     val BLUE = 2
     val GRAY = 3
 
-    val MAX_HEIGHT = 1200
-    val MAX_WIDTH = 800
+    val MAX_HEIGHT = 480
+    val MAX_WIDTH = 720
 
     fun convertRgbToGrayscale(image: Bitmap):Bitmap {
         var newImage = Bitmap.createBitmap(image!!.width, image.height, image.config)

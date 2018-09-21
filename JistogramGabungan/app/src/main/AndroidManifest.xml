@@ -23,6 +23,7 @@
         <activity android:name=".T1ShowJistogram" />
         <activity android:name=".T2JistogramEqualization" />
         <activity android:name=".T3JistogramSpecification" />
+        <activity android:name=".T4ChainCodeArialNumber"></activity>
     </application>
 
 </manifest>
