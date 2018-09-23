@@ -40,7 +40,7 @@ object IntentHelper {
         var photo : File? = null
         try {
             photo = createTemporaryFile("picture", ".jpg");
-//            photo.delete();
+            photo.delete();
         }
         catch(e : Exception) {
             Log.v("Error", "Can't create file to take picture!")
