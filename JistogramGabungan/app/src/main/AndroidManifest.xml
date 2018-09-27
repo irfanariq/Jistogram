@@ -23,7 +23,8 @@
         <activity android:name=".T1ShowJistogram" />
         <activity android:name=".T2JistogramEqualization" />
         <activity android:name=".T3JistogramSpecification" />
-        <activity android:name=".T4ChainCodeArialNumber"></activity>
+        <activity android:name=".T4ChainCodeArialNumber" />
+        <activity android:name=".T5ThinningImage"></activity>
     </application>
 
 </manifest>

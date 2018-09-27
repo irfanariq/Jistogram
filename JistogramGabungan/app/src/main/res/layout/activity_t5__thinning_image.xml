@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".T4ChainCodeArialNumber">
+    tools:context=".T5ThinningImage">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,6 +24,12 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/sizeImage"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
                 <ImageView
                     android:id="@+id/oldImage"
                     android:scaleType="fitCenter"
@@ -72,14 +78,14 @@
                     android:contentDescription="TODO" />
 
                 <Button
-                    android:id="@+id/recognizeBtn"
-                    android:text="Recognize"
+                    android:id="@+id/thinningBtn"
+                    android:text="Thinning"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/resultPrediction"
+                android:id="@+id/thinImageLayout"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:isScrollContainer="false"
@@ -88,7 +94,32 @@
                 android:layout_height="wrap_content">
 
                 <com.jsibbold.zoomage.ZoomageView
-                    android:id="@+id/zoomagePrediction"
+                    android:id="@+id/thinImage"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="fill_parent"
+                    android:adjustViewBounds="true"
+                    android:layout_height="wrap_content"
+                    app:zoomage_animateOnReset="true"
+                    app:zoomage_autoResetMode="UNDER"
+                    app:zoomage_autoCenter="true"
+                    app:zoomage_zoomable="true"
+                    app:zoomage_minScale="1"
+                    app:zoomage_maxScale="8"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/thinImageLayoutOnly"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:isScrollContainer="false"
+                android:scrollbars="none"
+                android:overScrollMode="never"
+                android:layout_height="wrap_content">
+
+                <com.jsibbold.zoomage.ZoomageView
+                    android:id="@+id/thinImageOnly"
                     android:scaleType="fitCenter"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="fill_parent"
