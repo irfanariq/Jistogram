@@ -19,6 +19,7 @@ class T5ThinningImage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_t5__thinning_image)
+
         rawImage.visibility = View.INVISIBLE
         preprediction.visibility = View.INVISIBLE
         thinImageLayout.visibility = View.INVISIBLE

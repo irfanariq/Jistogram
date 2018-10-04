@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private val TUGAS_3 = 3
     private val TUGAS_4 = 4
     private val TUGAS_5 = 5
+    private val TUGAS_6 = 6
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         tugas3Btn.setOnClickListener{ goToActivity(TUGAS_3) }
         tugas4Btn.setOnClickListener{ goToActivity(TUGAS_4) }
         tugas5Btn.setOnClickListener{ goToActivity(TUGAS_5) }
+        tugas6Btn.setOnClickListener{ goToActivity(TUGAS_6) }
     }
 
     private fun goToActivity(destination: Int) {
@@ -37,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             intent = Intent(this, T4ChainCodeArialNumber::class.java)
         } else if(destination == TUGAS_5) {
             intent = Intent(this, T5ThinningImage::class.java)
+        } else if(destination == TUGAS_6) {
+            intent = Intent(this, T6PredictThinning::class.java)
         }
 
         if (intent != null){
