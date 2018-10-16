@@ -1,6 +1,7 @@
 package com.jrafika.jrafika
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -17,12 +18,16 @@ class ImportImageFragment: Fragment() {
     var selectedImageView: ImageView? = null
     var addImageButton: FloatingActionButton? = null
 
+    var imageImportedListener: ((Bitmap) -> Unit)? = null
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             val image: Image? = ImagePicker.getFirstImageOrNull(data)
             if (selectedImageView != null && image != null) {
                 val bitmap = BitmapFactory.decodeFile(image.path)
                 selectedImageView!!.setImageBitmap(bitmap)
+                if (imageImportedListener != null)
+                    imageImportedListener!!(bitmap)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

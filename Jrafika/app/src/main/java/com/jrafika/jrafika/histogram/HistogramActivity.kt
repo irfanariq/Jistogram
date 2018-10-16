@@ -1,7 +1,10 @@
 package com.jrafika.jrafika.histogram
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentStatePagerAdapter
 import com.jrafika.jrafika.BaseActivity
+import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
 import kotlinx.android.synthetic.main.histogram_layout.*
 
@@ -13,9 +16,33 @@ class HistogramActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        val redHistogramFragment = RedHistogramFragment()
+        val greenHistogramFragment = GreenHistogramFragment()
+        val blueHistogramFragment = BlueHistogramFragment()
+
+        val importImageFragment = ImportImageFragment()
+        importImageFragment.imageImportedListener = {
+            HistogramCalculationTask(
+                    redHistogramFragment,
+                    greenHistogramFragment,
+                    blueHistogramFragment
+            ).execute(it)
+        }
+
         histogramViewPager.offscreenPageLimit = 5
-        val swipeAdapter = HistogramSwipeAdapter(supportFragmentManager)
-        histogramViewPager.adapter = swipeAdapter
+        histogramViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
+            override fun getItem(p0: Int): Fragment {
+                return arrayOf(
+                        importImageFragment,
+                        redHistogramFragment,
+                        greenHistogramFragment,
+                        blueHistogramFragment
+                )[p0]
+            }
+            override fun getCount(): Int {
+                return 4
+            }
+        }
         histogramViewPager.setCurrentItem(0)
     }
 }
