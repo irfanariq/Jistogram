@@ -1,15 +1,14 @@
 package com.jrafika.jrafika
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.MenuItem
-import kotlinx.android.synthetic.main.navigation_layout.*
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
+import kotlinx.android.synthetic.main.navigation_layout.*
 
 
 abstract open class BaseActivity : AppCompatActivity() {
@@ -32,23 +31,26 @@ abstract open class BaseActivity : AppCompatActivity() {
         drawerLayout.addView(contentView, 0)
 
         navigationView.setNavigationItemSelectedListener {
-            Log.d("wow", "menu selected " + it.itemId)
+            var intent: Intent? = null
             if (it.itemId == R.id.task1MenuOption) {
-                val intent = Intent(this, Task1Activity::class.java)
-                startActivity(intent)
+                intent = Intent(this, Task1Activity::class.java)
             } else if (it.itemId == R.id.task2MenuOption) {
-                val intent = Intent(this, Task2Activity::class.java)
-                startActivity(intent)
+                intent = Intent(this, Task2Activity::class.java)
             } else if (it.itemId == R.id.task3MenuOption) {
-                val intent = Intent(this, Task3Activity::class.java)
+                intent = Intent(this, Task3Activity::class.java)
+            }
+
+            if (intent != null) {
                 startActivity(intent)
+                if (this.javaClass != MainActivity::class.java) {
+                    finish()
+                }
             }
             true
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        Log.d("wow", "option item selected " + item!!.itemId)
         if (mToggle!!.onOptionsItemSelected(item)) {
             return true
         }
