@@ -34,7 +34,13 @@ abstract open class BaseActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             Log.d("wow", "menu selected " + it.itemId)
             if (it.itemId == R.id.task1MenuOption) {
-                val intent = Intent(this.getApplicationContext(), Task1Activity::class.java)
+                val intent = Intent(this, Task1Activity::class.java)
+                startActivity(intent)
+            } else if (it.itemId == R.id.task2MenuOption) {
+                val intent = Intent(this, Task2Activity::class.java)
+                startActivity(intent)
+            } else if (it.itemId == R.id.task3MenuOption) {
+                val intent = Intent(this, Task3Activity::class.java)
                 startActivity(intent)
             }
             true
