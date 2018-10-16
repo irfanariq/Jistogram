@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import com.jrafika.jrafika.histogram.HistogramActivity
 import kotlinx.android.synthetic.main.navigation_layout.*
 
 
@@ -33,7 +34,7 @@ abstract open class BaseActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             var intent: Intent? = null
             if (it.itemId == R.id.task1MenuOption) {
-                intent = Intent(this, Task1Activity::class.java)
+                intent = Intent(this, HistogramActivity::class.java)
             } else if (it.itemId == R.id.task2MenuOption) {
                 intent = Intent(this, Task2Activity::class.java)
             } else if (it.itemId == R.id.task3MenuOption) {

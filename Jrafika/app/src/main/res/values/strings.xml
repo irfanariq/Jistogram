@@ -2,14 +2,7 @@
     <string name="app_name">Jrafika</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
-    <string name="task1_title">Task 1</string>
+    <string name="histogram_title">Histogram</string>
     <string name="task2_title">Task 2</string>
     <string name="task3_title">Task 3</string>
-    <string name="title_activity_task1">Histogram</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 </resources>

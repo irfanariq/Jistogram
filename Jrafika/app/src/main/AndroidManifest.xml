@@ -16,9 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Task1Activity"></activity>
+        <activity android:name=".histogram.HistogramActivity"></activity>
         <activity android:name=".Task2Activity"></activity>
         <activity android:name=".Task3Activity"></activity>
+
+
     </application>
 
 </manifest>
