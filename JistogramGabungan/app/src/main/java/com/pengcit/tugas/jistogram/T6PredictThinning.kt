@@ -231,6 +231,8 @@ class T6PredictThinning : AppCompatActivity() {
                                 // remove corner until the corner are gone
                                 while (s == 1) {
                                     matriks[currentCorner.second][currentCorner.first] = 0
+                                    upperBound = Pair(min(upperBound.first, currentCorner.first), min(upperBound.second, currentCorner.second))
+                                    lowerBound = Pair(max(lowerBound.first, currentCorner.first), max(lowerBound.second, currentCorner.second))
                                     var ns = generateNeighbour(matriks, currentCorner.second, currentCorner.first)
                                     s = 0
                                     for (iDirection in 0..ns.size - 1) {
@@ -337,7 +339,7 @@ class T6PredictThinning : AppCompatActivity() {
                     guess = 4
                 }else if (resIntersection[i].size == 0) {
                     if (resCorners[i][0].first - resUpperBound[i].first < objectWidth / 2 && resCorners[i][1].first - resUpperBound[i].first < objectWidth / 2) {
-                        guess = 4
+                        guess = 7
                     }else if((resCorners[i][0].first - resCorners[i][1].first) * (resCorners[i][0].second - resCorners[i][1].second) > 0) {
                         guess = 2
                     }else{

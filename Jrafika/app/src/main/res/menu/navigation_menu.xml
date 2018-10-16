@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/task1MenuOption" android:title="@string/task1_title"></item>
+    <item android:id="@+id/task2MenuOption" android:title="@string/task2_title"></item>
+    <item android:id="@+id/task3MenuOption" android:title="@string/task3_title"></item>
+
+</menu>
