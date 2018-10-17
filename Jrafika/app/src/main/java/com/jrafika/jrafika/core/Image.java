@@ -59,7 +59,13 @@ public class Image {
     }
 
     public void setPixel(int x, int y, int color) {
-        pixels[y * width + x] = color;
+        if (type == IMAGE_RGB) {
+            pixels[y * width + x] = color;
+        } else if (type == IMAGE_GRAYSCALE) {
+            pixels[y * width + x] = color & 0xff;
+        } else {
+            pixels[y * width + x] = color > 0 ? 1 : 0;
+        }
     }
 
     public int getType() {

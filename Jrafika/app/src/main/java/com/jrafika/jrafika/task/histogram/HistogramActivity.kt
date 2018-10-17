@@ -16,6 +16,8 @@ class HistogramActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        setTitle(R.string.histogram_title)
+
         val redHistogramFragment = RedHistogramFragment()
         val greenHistogramFragment = GreenHistogramFragment()
         val blueHistogramFragment = BlueHistogramFragment()
@@ -27,6 +29,7 @@ class HistogramActivity : BaseActivity() {
                     greenHistogramFragment,
                     blueHistogramFragment
             ).execute(it)
+            histogramViewPager.setCurrentItem(1)
         }
 
         histogramViewPager.offscreenPageLimit = 5

@@ -2,12 +2,16 @@
     <string name="app_name">Jrafika</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+
     <string name="histogram_title">Histogram</string>
     <string name="histogram_equalization_title">Histogram Equalization</string>
+    <string name="linear_streching_title">Linear Streching</string>
 
     <string name="red_histogram">Red Histogram</string>
     <string name="green_histogram">Green Histogram</string>
     <string name="blue_histogram">Blue Histogram</string>
+    <string name="proceed">Proceed</string>
+    <string name="input_range">Input Range</string>
+    <string name="output_range">Output Range</string>
 
-    <string name="task3_title">Task 3</string>
 </resources>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/input_range"
+        android:textSize="24dp"
+        android:layout_marginTop="20dp"/>
+    
+    <com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar
+        android:id="@+id/inputSeekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:corner_radius="10"
+        app:min_value="0"
+        app:max_value="255"
+        app:steps="1"
+        app:min_start_value="10"
+        app:max_start_value="200"
+        app:data_type="_integer" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="5dp">
+        <TextView
+            android:id="@+id/inputMinText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"/>
+        <TextView
+            android:id="@+id/inputMaxText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:text="255"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/output_range"
+        android:textSize="24dp"
+        android:layout_marginTop="10dp"/>
+
+    <com.crystal.crystalrangeseekbar.widgets.BubbleThumbRangeSeekbar
+        android:id="@+id/outputSeekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
+        app:corner_radius="10"
+        app:min_value="0"
+        app:max_value="255"
+        app:steps="1"
+        app:min_start_value="0"
+        app:max_start_value="255"
+        app:data_type="_integer"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="5dp">
+        <TextView
+            android:id="@+id/outputMinText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"/>
+        <TextView
+            android:id="@+id/outputMaxText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_weight="1"
+            android:text="255"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/proceedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/proceed"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"/>
+
+</LinearLayout>

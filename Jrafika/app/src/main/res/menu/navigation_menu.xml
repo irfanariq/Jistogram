@@ -3,6 +3,6 @@
 
     <item android:id="@+id/task1MenuOption" android:title="@string/histogram_title"></item>
     <item android:id="@+id/task2MenuOption" android:title="@string/histogram_equalization_title"></item>
-    <item android:id="@+id/task3MenuOption" android:title="@string/task3_title"></item>
+    <item android:id="@+id/task3MenuOption" android:title="@string/linear_streching_title"></item>
 
 </menu>

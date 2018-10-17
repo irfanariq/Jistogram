@@ -73,4 +73,22 @@ public class Histogram {
         return image;
     }
 
+    public static Image stretchHistogram(Image image, int inputMin, int inputMax, int outputMin, int outputMax) {
+        image = image.clone();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int color = image.getPixel(x, y);
+                if (color < inputMin) {
+                    image.setPixel(x, y, 0);
+                } else if (color > inputMax) {
+                    image.setPixel(x, y, 255);
+                } else {
+                    int d = (color - inputMin) * (outputMax - outputMin) / (inputMax - inputMin) + outputMin;
+                    image.setPixel(x, y, d);
+                }
+            }
+        }
+        return image;
+    }
+
 }

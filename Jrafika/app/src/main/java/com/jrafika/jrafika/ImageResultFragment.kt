@@ -40,6 +40,10 @@ open class ImageResultFragment: Fragment() {
             imageLoadedListener!!(currentImage!!)
     }
 
+    fun getImage(): Image? {
+        return currentImage
+    }
+
     fun setLoading() {
         progressBar!!.visibility = View.VISIBLE
         progressBar!!.invalidate()
