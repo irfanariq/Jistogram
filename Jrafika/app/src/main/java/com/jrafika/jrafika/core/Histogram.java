@@ -12,7 +12,7 @@ public class Histogram {
 
         Map<Integer, Integer[]> result = new HashMap<>();
         result.put(0, new Integer[256]);
-        if (image.getChannel() > 1) {
+        if (image.getType() == Image.IMAGE_RGB) {
             result.put(1, new Integer[256]);
             result.put(2, new Integer[256]);
         }
@@ -21,7 +21,7 @@ public class Histogram {
                 result.get(k)[i] = 0;
 
         for (int pix : pixels) {
-            if (image.getChannel() > 1) {
+            if (image.getType() == Image.IMAGE_RGB) {
                 int red = Color.red(pix);
                 int green = Color.green(pix);
                 int blue = Color.blue(pix);
@@ -35,6 +35,42 @@ public class Histogram {
         }
 
         return result;
+    }
+
+    public static Integer[] calculateGrayHistogram(Image image) {
+        int[] pixels = image.getPixels();
+        Integer[] result = new Integer[256];
+        for (int i = 0; i < 256; i++) {
+            result[i] = 0;
+        }
+        for (int pix : pixels) {
+            result[pix]++;
+        }
+        return result;
+    }
+
+    public static Image equalizeHistogram(Image image) {
+        image = image.clone();
+        if (image.getType() == Image.IMAGE_RGB) {
+            image = Util.imageRGBToGrayscale(image);
+        }
+        Integer[] hist = calculateGrayHistogram(image);
+        int total = image.getWidth() * image.getHeight();
+        int[] colorMap = new int[256];
+        int cumulative = 0;
+        for (int i = 0; i < 256; i++) {
+            cumulative += hist[i];
+            colorMap[i] = Math.floorDiv(cumulative * 256,  total);
+            colorMap[i] = Math.min(255, colorMap[i]);
+            colorMap[i] = Math.max(0, colorMap[i]);
+        }
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int pix = image.getPixel(x, y);
+                image.setPixel(x, y, colorMap[pix]);
+            }
+        }
+        return image;
     }
 
 }

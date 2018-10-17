@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import com.jrafika.jrafika.task.histogram.HistogramActivity
+import com.jrafika.jrafika.task.histogram.HistogramEqualizationActivity
 import kotlinx.android.synthetic.main.navigation_layout.*
 
 
@@ -36,7 +37,7 @@ abstract open class BaseActivity : AppCompatActivity() {
             if (it.itemId == R.id.task1MenuOption) {
                 intent = Intent(this, HistogramActivity::class.java)
             } else if (it.itemId == R.id.task2MenuOption) {
-                intent = Intent(this, Task2Activity::class.java)
+                intent = Intent(this, HistogramEqualizationActivity::class.java)
             } else if (it.itemId == R.id.task3MenuOption) {
                 intent = Intent(this, Task3Activity::class.java)
             }

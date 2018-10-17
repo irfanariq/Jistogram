@@ -16,8 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.jrafika.jrafika.task.histogram.HistogramActivity" />
-        <activity android:name=".Task2Activity" />
+        <activity android:name=".task.histogram.HistogramActivity" />
+        <activity android:name=".task.histogram.HistogramEqualizationActivity" />
         <activity android:name=".Task3Activity" />
     </application>
 

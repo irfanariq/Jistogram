@@ -42,8 +42,7 @@ public class Image {
         if (channel == 0) {
             switch (this.type) {
                 case IMAGE_RGB: return Color.red(color);
-                case IMAGE_GRAYSCALE: return Color.alpha(color);
-                default: return Color.alpha(color) > 0 ? 0 : 1;
+                default: return color;
             }
         } else if (channel == 1)
             return Color.green(pixels[y * width + x]);
@@ -59,22 +58,25 @@ public class Image {
         return pixels;
     }
 
+    public void setPixel(int x, int y, int color) {
+        pixels[y * width + x] = color;
+    }
+
     public int getType() {
         return type;
+    }
+
+    public Image clone() {
+        int[] newPixels = pixels.clone();
+        return new Image(width, height, type, newPixels);
     }
 
     public static Image fromBitmap(Bitmap bitmap) {
         int height = bitmap.getHeight();
         int width = bitmap.getWidth();
-        Bitmap.Config config = bitmap.getConfig();
         int pixels[] = new int[width * height];
         bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-
-        if (config.equals(Bitmap.Config.ALPHA_8)) {
-            return new Image(width, height, IMAGE_GRAYSCALE, pixels);
-        } else {
-            return new Image(width, height, IMAGE_RGB, pixels);
-        }
+        return new Image(width, height, IMAGE_RGB, pixels);
     }
 
     public static Image fromBytes(byte[] input) {
@@ -95,11 +97,19 @@ public class Image {
     }
 
     public Bitmap toBitmap() {
-        Bitmap.Config type = Bitmap.Config.ALPHA_8;
-        if (this.type == IMAGE_RGB)
-            type = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = Bitmap.createBitmap(width, height, type);
-        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        Bitmap bitmap = Bitmap.createBitmap(width, height,  Bitmap.Config.ARGB_8888);
+        int[] copyPixels = pixels;
+        if (type != IMAGE_RGB) {
+            copyPixels = copyPixels.clone();
+            for (int i = 0; i < copyPixels.length; i++) {
+                int color = copyPixels[i];
+                if (type == IMAGE_GRAYSCALE)
+                    copyPixels[i] = Color.argb(255, color, color, color);
+                else
+                    copyPixels[i] = color > 0 ? Color.BLACK : Color.WHITE;
+            }
+        }
+        bitmap.setPixels(copyPixels, 0, width, 0, 0, width, height);
         return bitmap;
     }
 
