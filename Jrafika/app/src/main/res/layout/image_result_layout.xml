@@ -10,7 +10,7 @@
         android:id="@+id/resultImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/ic_no_image"
+        android:src="@drawable/no_image"
         app:zoomage_restrictBounds="false"
         app:zoomage_animateOnReset="true"
         app:zoomage_autoResetMode="UNDER"

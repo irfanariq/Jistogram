@@ -1,8 +1,10 @@
 package com.jrafika.jrafika.core;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Histogram {
@@ -48,6 +50,16 @@ public class Histogram {
         }
         return result;
     }
+    
+    public static Integer[] calculateCumulativeHistogram(Integer[] histogram) {
+        Integer[] result = new Integer[histogram.length];
+        int cumulative = 0;
+        for (int i = 0; i < histogram.length; i++) {
+            cumulative += histogram[i];
+            result[i] = cumulative;
+        }
+        return result;
+    }
 
     public static Image equalizeHistogram(Image image) {
         image = image.clone();
@@ -86,6 +98,41 @@ public class Histogram {
                     int d = (color - inputMin) * (outputMax - outputMin) / (inputMax - inputMin) + outputMin;
                     image.setPixel(x, y, d);
                 }
+            }
+        }
+        return image;
+    }
+
+    public static Image specifyHistogram(Image image, Integer[] targetHistogram) {
+        image = image.clone();
+        Integer[] histReal = calculateGrayHistogram(image);
+        Integer[] cumuReal = calculateCumulativeHistogram(histReal);
+        Integer[] cumuTarg = calculateCumulativeHistogram(targetHistogram);
+
+        int lastTarget = cumuTarg[cumuTarg.length - 1];
+        int lastReal = cumuReal[cumuReal.length - 1];
+        float scale = (float) lastReal / (float) lastTarget;
+        for (int i = 0; i < cumuTarg.length; i++) {
+            cumuTarg[i] = (int) Math.floor((float) cumuTarg[i] * scale);
+        }
+
+        int[] mapping = new int[cumuReal.length];
+        for (int i = 0; i < cumuReal.length; i++) {
+            mapping[i] = 0;
+            int currMin = Math.abs(cumuReal[i] - cumuTarg[0]);
+            for (int j = 0; j < cumuTarg.length; j++) {
+                int diff = Math.abs(cumuReal[i] - cumuTarg[j]);
+                if (diff < currMin) {
+                    mapping[i] = j;
+                    currMin = diff;
+                }
+            }
+        }
+
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int pix = image.getPixel(x, y);
+                image.setPixel(x, y, mapping[pix]);
             }
         }
         return image;

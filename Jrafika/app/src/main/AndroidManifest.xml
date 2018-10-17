@@ -19,6 +19,7 @@
         <activity android:name=".task.histogram.HistogramActivity" />
         <activity android:name=".task.histogram.HistogramEqualizationActivity" />
         <activity android:name=".task.stretching.LinearStretchingActivity" />
+        <activity android:name=".task.specification.HistogramSpecificationActivity" />
     </application>
 
 </manifest>

@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import com.jrafika.jrafika.task.histogram.HistogramActivity
 import com.jrafika.jrafika.task.histogram.HistogramEqualizationActivity
+import com.jrafika.jrafika.task.specification.HistogramSpecificationActivity
 import com.jrafika.jrafika.task.stretching.LinearStretchingActivity
 import kotlinx.android.synthetic.main.navigation_layout.*
 
@@ -41,6 +42,8 @@ abstract open class BaseActivity : AppCompatActivity() {
                 intent = Intent(this, HistogramEqualizationActivity::class.java)
             } else if (it.itemId == R.id.task3MenuOption) {
                 intent = Intent(this, LinearStretchingActivity::class.java)
+            } else if (it.itemId == R.id.task4MenuOption) {
+                intent = Intent(this, HistogramSpecificationActivity::class.java)
             }
 
             if (intent != null) {

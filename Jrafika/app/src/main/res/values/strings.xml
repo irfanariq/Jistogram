@@ -13,5 +13,10 @@
     <string name="proceed">Proceed</string>
     <string name="input_range">Input Range</string>
     <string name="output_range">Output Range</string>
+    <string name="pivot_1">Pivot 1</string>
+    <string name="pivot_2">Pivot 2</string>
+    <string name="pivot_3">Pivot 3</string>
+    <string name="pivot_4">Pivot 4</string>
+    <string name="histogram_specification_title">Histogram Specification</string>
 
 </resources>
