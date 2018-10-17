@@ -1,4 +1,4 @@
-package com.jrafika.jrafika.histogram
+package com.jrafika.jrafika.task.histogram
 
 import android.os.AsyncTask
 import com.jrafika.jrafika.core.Histogram

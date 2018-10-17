@@ -1,6 +1,5 @@
-package com.jrafika.jrafika.histogram
+package com.jrafika.jrafika.task.histogram
 
-import android.opengl.Visibility
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -14,7 +13,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.jrafika.jrafika.R
 
-class RedHistogramFragment: Fragment() {
+class BlueHistogramFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.histogram_fragment_layout, container, false)
@@ -22,7 +21,7 @@ class RedHistogramFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val titleView = view.findViewById<TextView>(R.id.histogramChartTitle)
-        titleView.text = resources.getText(R.string.red_histogram)
+        titleView.text = resources.getText(R.string.blue_histogram)
     }
 
     fun showLoadingHistogram() {
@@ -41,8 +40,8 @@ class RedHistogramFragment: Fragment() {
         val entries = ArrayList<Entry>()
         for (value in histogram)
             entries.add(Entry(entries.size.toFloat() , value.toFloat()))
-        val dataSet = LineDataSet(entries, resources.getText(R.string.red_histogram).toString())
-        dataSet.color = R.color.colorRed
+        val dataSet = LineDataSet(entries, resources.getText(R.string.blue_histogram).toString())
+        dataSet.color = R.color.colorBlue
         chart.data = LineData(dataSet)
 
         chart.visibility = View.VISIBLE
@@ -51,5 +50,4 @@ class RedHistogramFragment: Fragment() {
         chart.invalidate()
         progressBar.invalidate()
     }
-
 }

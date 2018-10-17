@@ -1,24 +1,19 @@
 package com.jrafika.jrafika
 
-import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import com.esafirm.imagepicker.features.ImagePicker
 import com.esafirm.imagepicker.model.Image
-import android.R.array
-import android.R.id.edit
-import android.content.SharedPreferences
-
-
 
 class ImportImageFragment: Fragment() {
 
@@ -28,38 +23,38 @@ class ImportImageFragment: Fragment() {
     var pasteImageButton: FloatingActionButton? = null
 
     var imageImportedListener: ((com.jrafika.jrafika.core.Image) -> Unit)? = null
+    var currentImage: com.jrafika.jrafika.core.Image? = null
 
     val MAX_WIDTH = 800
     val MAX_HEIGHT = 600
+
+    fun onGetBitmap(bitmap: Bitmap) {
+        var dest_width = bitmap.width
+        var dest_height = bitmap.height
+        if (dest_width > MAX_WIDTH) {
+            dest_width = MAX_WIDTH
+            dest_height = Math.round(bitmap.height.toFloat() / bitmap.width.toFloat() * dest_width.toFloat())
+        }
+        if (dest_height > MAX_HEIGHT) {
+            dest_height = MAX_HEIGHT
+            dest_width = Math.round(bitmap.width.toFloat() / bitmap.height.toFloat() * dest_height.toFloat())
+        }
+        val bitmapSmall = Bitmap.createScaledBitmap(bitmap, dest_width, dest_height, false);
+        currentImage = com.jrafika.jrafika.core.Image.fromBitmap(bitmapSmall)
+
+        copyImageButton!!.show()
+
+        selectedImageView!!.setImageBitmap(bitmapSmall)
+        if (imageImportedListener != null)
+            imageImportedListener!!(currentImage!!)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (ImagePicker.shouldHandle(requestCode, resultCode, data)) {
             val image: Image? = ImagePicker.getFirstImageOrNull(data)
             if (selectedImageView != null && image != null) {
                 val bitmap = BitmapFactory.decodeFile(image.path)
-
-                var dest_width = bitmap.width
-                var dest_height = bitmap.height
-                if (bitmap.width > MAX_WIDTH) {
-                    dest_width = MAX_WIDTH
-                    dest_height = bitmap.height / bitmap.width * dest_width
-                }
-                if (bitmap.height > MAX_HEIGHT) {
-                    dest_height = MAX_HEIGHT
-                    dest_width = bitmap.width / bitmap.height * dest_height
-                }
-                val bitmapSmall = Bitmap.createScaledBitmap(bitmap, dest_width, dest_height, false);
-                val coreImage = com.jrafika.jrafika.core.Image.fromBitmap(bitmapSmall)
-
-                val settings = context!!.getSharedPreferences("images", 0)
-                val editor = settings.edit()
-                editor.putString("currentImage", bitmapSmall.toString())
-
-                copyImageButton!!.show()
-
-                selectedImageView!!.setImageBitmap(bitmapSmall)
-                if (imageImportedListener != null)
-                    imageImportedListener!!(coreImage)
+                onGetBitmap(bitmap)
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -75,6 +70,11 @@ class ImportImageFragment: Fragment() {
         copyImageButton = view.findViewById(R.id.copyImageButton)
         pasteImageButton = view.findViewById(R.id.pasteImageButton)
 
+        val settings = context!!.getSharedPreferences("com.jrafika.jrafika.images", 0)
+        if (settings.contains("clipboardImage")) {
+            pasteImageButton!!.show()
+        }
+
         addImageButton!!.setOnClickListener {
             ImagePicker.create(this)
                     .single()
@@ -83,7 +83,26 @@ class ImportImageFragment: Fragment() {
         }
 
         copyImageButton!!.setOnClickListener {
-            val clipboard = context!!.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            if (currentImage != null) {
+                val settings = context!!.getSharedPreferences("com.jrafika.jrafika.images", 0)
+                with(settings.edit()) {
+                    putString("clipboardImage", currentImage.toString())
+                    commit()
+                }
+                pasteImageButton!!.show()
+            }
+        }
+
+        pasteImageButton!!.setOnClickListener {
+            val settings = context!!.getSharedPreferences("com.jrafika.jrafika.images", 0)
+            val bitmapBase64 = settings.getString("clipboardImage", null)
+            Log.d("wow", "load image " + bitmapBase64)
+            if (bitmapBase64 == null) {
+                Toast.makeText(getContext(), "Paste image error", Toast.LENGTH_LONG).show()
+            } else {
+                val image = com.jrafika.jrafika.core.Image.fromBase64String(bitmapBase64)
+                onGetBitmap(image.toBitmap())
+            }
         }
 
         super.onViewCreated(view, savedInstanceState)

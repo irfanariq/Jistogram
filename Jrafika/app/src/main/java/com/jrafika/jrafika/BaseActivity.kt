@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
-import com.jrafika.jrafika.histogram.HistogramActivity
+import com.jrafika.jrafika.task.histogram.HistogramActivity
 import kotlinx.android.synthetic.main.navigation_layout.*
 
 

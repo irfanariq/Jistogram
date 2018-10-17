@@ -2,6 +2,9 @@ package com.jrafika.jrafika.core;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.util.Base64;
+
+import java.nio.ByteBuffer;
 
 public class Image {
 
@@ -13,17 +16,15 @@ public class Image {
 
     private int width;
     private int height;
-    private int channel;
     private int type;
     private int pixels[];
 
     public Image() {
     }
 
-    public Image(int width, int height, int channel, int type, int[] pixels) {
+    public Image(int width, int height, int type, int[] pixels) {
         this.width = width;
         this.height = height;
-        this.channel = channel;
         this.type = type;
         this.pixels = pixels;
     }
@@ -36,15 +37,15 @@ public class Image {
         return height;
     }
 
-    public int getChannel() {
-        return channel;
-    }
-
     public int getPixel(int x, int y, int channel) {
         int color = pixels[y * width + x];
-        if (channel == 0)
-            return this.channel == 0 ? Color.alpha(color) : Color.red(color);
-        else if (channel == 1)
+        if (channel == 0) {
+            switch (this.type) {
+                case IMAGE_RGB: return Color.red(color);
+                case IMAGE_GRAYSCALE: return Color.alpha(color);
+                default: return Color.alpha(color) > 0 ? 0 : 1;
+            }
+        } else if (channel == 1)
             return Color.green(pixels[y * width + x]);
         else
             return Color.blue(pixels[y * width + x]);
@@ -70,22 +71,48 @@ public class Image {
         bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
 
         if (config.equals(Bitmap.Config.ALPHA_8)) {
-            return new Image(width, height, 1, IMAGE_GRAYSCALE, pixels);
+            return new Image(width, height, IMAGE_GRAYSCALE, pixels);
         } else {
-            return new Image(width, height, 3, IMAGE_RGB, pixels);
+            return new Image(width, height, IMAGE_RGB, pixels);
         }
     }
 
-//    @Override
-//    public String toString() {
-//        private int width;
-//        private int height;
-//        private int channel;
-//        private int type;
-//        private int pixels[];
-//
-//        ByteBuffer
-//        return "";
-//    }
+    public static Image fromBytes(byte[] input) {
+        ByteBuffer byteBuffer = ByteBuffer.wrap(input);
+        int width = byteBuffer.getInt();
+        int height = byteBuffer.getInt();
+        int type = byteBuffer.getInt();
+        int[] pixels = new int[width * height];
+        for (int i = 0; i < pixels.length; i++) {
+            pixels[i] = byteBuffer.getInt();
+        }
+        return new Image(width, height, type, pixels);
+    }
+
+    public static Image fromBase64String(String input) {
+        byte[] buff = Base64.decode(input, Base64.DEFAULT);
+        return fromBytes(buff);
+    }
+
+    public Bitmap toBitmap() {
+        Bitmap.Config type = Bitmap.Config.ALPHA_8;
+        if (this.type == IMAGE_RGB)
+            type = Bitmap.Config.ARGB_8888;
+        Bitmap bitmap = Bitmap.createBitmap(width, height, type);
+        bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+        return bitmap;
+    }
+
+    @Override
+    public String toString() {
+        ByteBuffer buffer = ByteBuffer.allocate(width * height * 4 + 16);
+        buffer.putInt(width);
+        buffer.putInt(height);
+        buffer.putInt(type);
+        for (int pix : pixels) {
+            buffer.putInt(pix);
+        }
+        return Base64.encodeToString(buffer.array(), Base64.DEFAULT);
+    }
 
 }
