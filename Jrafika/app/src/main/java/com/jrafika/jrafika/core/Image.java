@@ -76,4 +76,16 @@ public class Image {
         }
     }
 
+//    @Override
+//    public String toString() {
+//        private int width;
+//        private int height;
+//        private int channel;
+//        private int type;
+//        private int pixels[];
+//
+//        ByteBuffer
+//        return "";
+//    }
+
 }

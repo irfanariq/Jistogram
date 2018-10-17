@@ -29,4 +29,27 @@
         android:src="@drawable/ic_add_image"
         android:layout_margin="16dp" />
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|bottom"
+        android:layout_margin="16dp">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/copyImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_copy_image"
+            android:layout_marginRight="10dp"
+            android:visibility="gone"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/pasteImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_paste_image"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
 </FrameLayout>

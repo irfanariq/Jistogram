@@ -1,6 +1,5 @@
 package com.jrafika.jrafika.histogram
 
-import android.graphics.Bitmap
 import android.os.AsyncTask
 import com.jrafika.jrafika.core.Histogram
 import com.jrafika.jrafika.core.Image
@@ -8,15 +7,14 @@ import com.jrafika.jrafika.core.Image
 class HistogramCalculationTask(
         redHistogramFragment: RedHistogramFragment,
         greenHistogramFragment: GreenHistogramFragment,
-        blueHistogramFragment: BlueHistogramFragment) : AsyncTask<Bitmap, Unit, Map<Int, Array<Int>>>() {
+        blueHistogramFragment: BlueHistogramFragment) : AsyncTask<Image, Unit, Map<Int, Array<Int>>>() {
 
     val redHistogramFragment = redHistogramFragment
     val greenHistogramFragment = greenHistogramFragment
     val blueHistogramFragment = blueHistogramFragment
 
-    override fun doInBackground(vararg img: Bitmap?): Map<Int, Array<Int>> {
-        val image = Image.fromBitmap(img[0])
-        return Histogram.calculateHistogram(image)
+    override fun doInBackground(vararg img: Image?): Map<Int, Array<Int>> {
+        return Histogram.calculateHistogram(img[0])
     }
 
     override fun onPreExecute() {
