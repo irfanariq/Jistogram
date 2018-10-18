@@ -36,8 +36,12 @@ class ImageSkeletonActivity: BaseActivity() {
         }
 
         blackWhiteOptionFragment.proceedFunction = { bwImage ->
-            ImageTask(thinnedImage, ImageThinningDisplayer()).execute(bwImage)
-            ImageTask(predictionImageFragment, ImageThinner())
+            ImageTask(thinnedImage, ImageNoiseRemover())
+                    .then(ImageTask(thinnedImage, ImageThinningDisplayer()))
+                    .execute(bwImage)
+
+            ImageTask(predictionImageFragment, ImageNoiseRemover())
+                    .then(ImageTask(predictionImageFragment, ImageThinner()))
                     .then(ImageTask(predictionImageFragment, SkeletonPredictor()))
                     .execute(bwImage)
             taskViewPager.setCurrentItem(3)

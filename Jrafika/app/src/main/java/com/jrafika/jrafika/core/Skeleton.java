@@ -200,6 +200,7 @@ public class Skeleton {
             }
 
             Queue<Pair<Integer, Integer>> toBeDeleted = new LinkedList<>();
+            Queue<Pair<Integer, Integer>> intersectionReference = new LinkedList<>();
             for (CriticalPoint corner : criticalPoints) {
                 if (corner.type != CriticalPoint.Type.CORNER) {
                     continue;
@@ -213,6 +214,7 @@ public class Skeleton {
                     double dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 0.05 * area.n) {
                         toBeDeleted.add(corner.pos);
+                        intersectionReference.add(intersection.pos);
                         break;
                     }
                 }
@@ -220,15 +222,19 @@ public class Skeleton {
 
             while (!toBeDeleted.isEmpty()) {
                 Pair<Integer, Integer> current = toBeDeleted.remove();
-                int cx = current.first;
-                int cy = current.second;
+                Pair<Integer, Integer> currentIntersection = intersectionReference.remove();
+                if (isIntersection(image, currentIntersection.first, currentIntersection.second)) {
+                    int cx = current.first;
+                    int cy = current.second;
 
-                image.setPixel(cx, cy, 0);
-                for (int di = 0; di < 8; di++) {
-                    int nx = cx + Util.DIRECTION_X[di];
-                    int ny = cy + Util.DIRECTION_Y[di];
-                    if (nx >= 0 && ny >= 0 && nx < width && ny < height && isCorner(image, nx, ny)) {
-                        toBeDeleted.add(new Pair(nx, ny));
+                    image.setPixel(cx, cy, 0);
+                    for (int di = 0; di < 8; di++) {
+                        int nx = cx + Util.DIRECTION_X[di];
+                        int ny = cy + Util.DIRECTION_Y[di];
+                        if (nx >= 0 && ny >= 0 && nx < width && ny < height && isCorner(image, nx, ny)) {
+                            toBeDeleted.add(new Pair(nx, ny));
+                            intersectionReference.add(currentIntersection);
+                        }
                     }
                 }
             }

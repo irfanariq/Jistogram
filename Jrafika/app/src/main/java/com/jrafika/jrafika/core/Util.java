@@ -160,9 +160,7 @@ public class Util {
                         }
                     }
 
-                    int area = (lowerBound.second - upperBound.second)
-                            * (lowerBound.first - upperBound.second);
-                    if (thresholdArea < 0 || area >= thresholdArea) {
+                    if (thresholdArea < 0 || npoint >= thresholdArea) {
                         result.add(new AreaBox(upperBound, lowerBound, seedPoint, npoint));
                     }
                 }

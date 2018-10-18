@@ -18,7 +18,11 @@ class ImageTask(
     val histogramFragment = histogramFragment
 
     fun then(next: ImageTask?): ImageTask {
-        this.next = next
+        if (this.next != null) {
+            this.next!!.then(next);
+        } else {
+            this.next = next
+        }
         return this
     }
 
