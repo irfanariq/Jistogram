@@ -13,7 +13,17 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.jrafika.jrafika.R
 
-class BlueHistogramFragment: Fragment() {
+class DisplayHistogramFragment : Fragment() {
+
+    companion object {
+        fun newInstance(title: String): DisplayHistogramFragment {
+            val args = Bundle()
+            args.putString("title", title)
+            val fragment = DisplayHistogramFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.histogram_fragment_layout, container, false)
@@ -21,7 +31,11 @@ class BlueHistogramFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val titleView = view.findViewById<TextView>(R.id.histogramChartTitle)
-        titleView.text = resources.getText(R.string.blue_histogram)
+        var title = "Histogram"
+        if (arguments != null && arguments!!["title"] != null) {
+            title = arguments!!["title"] as String
+        }
+        titleView.text = title
     }
 
     fun showLoadingHistogram() {
@@ -40,8 +54,14 @@ class BlueHistogramFragment: Fragment() {
         val entries = ArrayList<Entry>()
         for (value in histogram)
             entries.add(Entry(entries.size.toFloat() , value.toFloat()))
-        val dataSet = LineDataSet(entries, resources.getText(R.string.blue_histogram).toString())
-        dataSet.color = R.color.colorBlue
+
+        var title = "Histogram"
+        if (arguments != null && arguments!!["string"] != null) {
+            title = arguments!!["string"] as String
+        }
+        val dataSet = LineDataSet(entries, title)
+
+        dataSet.color = R.color.colorRed
         chart.data = LineData(dataSet)
 
         chart.visibility = View.VISIBLE
@@ -50,4 +70,5 @@ class BlueHistogramFragment: Fragment() {
         chart.invalidate()
         progressBar.invalidate()
     }
+
 }

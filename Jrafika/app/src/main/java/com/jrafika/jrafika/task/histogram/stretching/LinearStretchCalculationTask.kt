@@ -1,4 +1,4 @@
-package com.jrafika.jrafika.task.stretching
+package com.jrafika.jrafika.task.histogram.stretching
 
 import android.os.AsyncTask
 import com.jrafika.jrafika.ImageResultFragment

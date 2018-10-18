@@ -18,8 +18,8 @@
         </activity>
         <activity android:name=".task.histogram.HistogramActivity" />
         <activity android:name=".task.histogram.HistogramEqualizationActivity" />
-        <activity android:name=".task.stretching.LinearStretchingActivity" />
-        <activity android:name=".task.specification.HistogramSpecificationActivity" />
+        <activity android:name="com.jrafika.jrafika.task.histogram.stretching.LinearStretchingActivity" />
+        <activity android:name="com.jrafika.jrafika.task.histogram.specification.HistogramSpecificationActivity" />
     </application>
 
 </manifest>

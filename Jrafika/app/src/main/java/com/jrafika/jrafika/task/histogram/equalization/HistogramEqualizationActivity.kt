@@ -1,4 +1,4 @@
-package com.jrafika.jrafika.task.stretching
+package com.jrafika.jrafika.task.histogram
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,12 +7,11 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
+import com.jrafika.jrafika.core.ImageEqualizer
 import com.jrafika.jrafika.core.ImageGrayscaler
-import com.jrafika.jrafika.core.ImageStretcher
-import com.jrafika.jrafika.task.histogram.ImageTask
 import kotlinx.android.synthetic.main.histogram_layout.*
 
-class LinearStretchingActivity : BaseActivity() {
+class HistogramEqualizationActivity : BaseActivity() {
 
     override val contentViewId: Int
         get() = R.layout.histogram_layout
@@ -20,43 +19,34 @@ class LinearStretchingActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTitle(R.string.linear_streching_title)
+        setTitle(R.string.histogram_equalization_title)
 
         val grayscaledImageFragment = ImageResultFragment()
-        val stretchedHistogramFragment = ImageResultFragment()
-        val optionFragment = LinearStretchingOptionFragment()
+        val grayscaledHistogramFragment = DisplayHistogramFragment.newInstance(resources.getString(R.string.grayscaled_histogram))
+        val equalizedImageFragment = ImageResultFragment()
+        val equalizedHistogramFragment = DisplayHistogramFragment.newInstance(getString(R.string.equalized_histogram))
 
         val importImageFragment = ImportImageFragment()
         importImageFragment.imageImportedListener = {
-            ImageTask(grayscaledImageFragment, ImageGrayscaler()).execute(it)
+            ImageTask(grayscaledImageFragment,ImageGrayscaler(), listOf(grayscaledHistogramFragment))
+                    .then(ImageTask(equalizedImageFragment, ImageEqualizer(), listOf(equalizedHistogramFragment)))
+                    .execute(it)
             histogramViewPager.setCurrentItem(1)
         }
 
-        optionFragment.proceedFunction = { inputMin, inputMax, outputMin, outputMax ->
-            val img = grayscaledImageFragment.getImage()
-            if (img != null) {
-                ImageTask(
-                        stretchedHistogramFragment,
-                        ImageStretcher(
-                                inputMin, inputMax, outputMin, outputMax
-                        )
-                ).execute(img)
-                histogramViewPager.setCurrentItem(3)
-            }
-        }
-
-        histogramViewPager.offscreenPageLimit = 4
+        histogramViewPager.offscreenPageLimit = 5
         histogramViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
                         grayscaledImageFragment,
-                        optionFragment,
-                        stretchedHistogramFragment
+                        grayscaledHistogramFragment,
+                        equalizedImageFragment,
+                        equalizedHistogramFragment
                 )[p0]
             }
             override fun getCount(): Int {
-                return 4
+                return 5
             }
         }
         histogramViewPager.setCurrentItem(0)

@@ -31,8 +31,7 @@ public class Histogram {
                 result.get(1)[green]++;
                 result.get(2)[blue]++;
             } else {
-                int alpha = Color.alpha(pix);
-                result.get(0)[alpha]++;
+                result.get(0)[pix]++;
             }
         }
 

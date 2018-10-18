@@ -10,8 +10,8 @@ import android.view.MenuItem
 import android.view.View
 import com.jrafika.jrafika.task.histogram.HistogramActivity
 import com.jrafika.jrafika.task.histogram.HistogramEqualizationActivity
-import com.jrafika.jrafika.task.specification.HistogramSpecificationActivity
-import com.jrafika.jrafika.task.stretching.LinearStretchingActivity
+import com.jrafika.jrafika.task.histogram.specification.HistogramSpecificationActivity
+import com.jrafika.jrafika.task.histogram.stretching.LinearStretchingActivity
 import kotlinx.android.synthetic.main.navigation_layout.*
 
 

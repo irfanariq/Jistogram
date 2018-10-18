@@ -10,6 +10,10 @@
     <string name="red_histogram">Red Histogram</string>
     <string name="green_histogram">Green Histogram</string>
     <string name="blue_histogram">Blue Histogram</string>
+    <string name="grayscaled_histogram">Grayscaled Histogram</string>
+    <string name="original_histogram">Original Histogram</string>
+    <string name="specified_histogram">Specified Histogram</string>
+
     <string name="proceed">Proceed</string>
     <string name="input_range">Input Range</string>
     <string name="output_range">Output Range</string>
@@ -18,5 +22,7 @@
     <string name="pivot_3">Pivot 3</string>
     <string name="pivot_4">Pivot 4</string>
     <string name="histogram_specification_title">Histogram Specification</string>
+    <string name="equalized_histogram">Equalized Histogram</string>
+    <string name="stretched_histogram">Stretched Histogram</string>
 
 </resources>
