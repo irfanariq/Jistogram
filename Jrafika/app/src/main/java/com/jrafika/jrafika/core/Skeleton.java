@@ -55,88 +55,43 @@ public class Skeleton {
         int width = image.getWidth();
         int height = image.getHeight();
 
-        Set<Pair<Integer,Integer>> next = new HashSet<>();
-        Set<Pair<Integer,Integer>> next2 = new HashSet<>();
         List<Pair<Integer, Integer>> toDelete = new LinkedList<>();
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                if (image.getPixel(x, y) > 0) {
-                    int[] ng = getNeighbors(image, x, y);
-                    if (ng[0] + ng[2] + ng[4] + ng[6] < 4) {
-                        next.add(new Pair(x, y));
-                    }
-                }
-            }
-        }
-
         int deleted;
         do {
             deleted = 0;
 
             toDelete.clear();
-            for (Pair<Integer, Integer> current : next) {
-                int cx = current.first;
-                int cy = current.second;
-
-                if (image.getPixel(cx, cy) > 0) {
-                    int[] ng = getNeighbors(image, cx, cy);
-                    int nc = getNC(ng);
-                    int ns = getNS(ng);
-                    if (2 <= nc && nc <= 6 && ns == 1 && (ng[2] == 0 || ng[4] == 0 || (ng[0] == 0 && ng[6] == 0))) {
-                        toDelete.add(new Pair(cx, cy));
-                        deleted++;
-                        for (int di = 0; di < 8; di++) {
-                            int nx = cx + Util.DIRECTION_X[di];
-                            int ny = cy + Util.DIRECTION_Y[di];
-                            ng = getNeighbors(image, nx, ny);
-                            if (nx >= 0 && ny >= 0 &&
-                                    nx < width && ny < height &&
-                                    image.getPixel(nx, ny) > 0 &&
-                                    ng[0] + ng[2] + ng[4] + ng[6] < 4) {
-                                next2.add(new Pair(nx, ny));
-                            }
+            for (int cx = 0; cx < width; cx++) {
+                for (int cy = 0; cy < height; cy++) {
+                    if (image.getPixel(cx, cy) > 0) {
+                        int[] ng = getNeighbors(image, cx, cy);
+                        int nc = getNC(ng);
+                        int ns = getNS(ng);
+                        if (2 <= nc && nc <= 6 && ns == 1 && (ng[2] == 0 || ng[4] == 0 || (ng[0] == 0 && ng[6] == 0))) {
+                            toDelete.add(new Pair(cx, cy));
+                            deleted++;
                         }
                     }
-                }
-                if (image.getPixel(cx, cy) > 0) {
-                    next2.add(new Pair(cx, cy));
                 }
             }
             for (Pair<Integer, Integer> pDel : toDelete) {
                 image.setPixel(pDel.first, pDel.second, 0);
             }
-            next.clear();
 
             toDelete.clear();
-            for (Pair<Integer, Integer> current : next2) {
-                int cx = current.first;
-                int cy = current.second;
-
-                if (image.getPixel(cx, cy) > 0) {
-                    int[] ng = getNeighbors(image, cx, cy);
-                    int nc = getNC(ng);
-                    int ns = getNS(ng);
-                    if (2 <= nc && nc <= 6 && ns == 1 && (ng[0] == 0 || ng[6] == 0 || (ng[2] == 0 && ng[4] == 0))) {
-                        toDelete.add(new Pair(cx, cy));
-                        deleted++;
-                        for (int di = 0; di < 8; di++) {
-                            int nx = cx + Util.DIRECTION_X[di];
-                            int ny = cy + Util.DIRECTION_Y[di];
-                            ng = getNeighbors(image, nx, ny);
-                            if (nx >= 0 && ny >= 0 &&
-                                    nx < width && ny < height &&
-                                    image.getPixel(nx, ny) > 0 &&
-                                    ng[0] + ng[2] + ng[4] + ng[6] < 4) {
-                                next.add(new Pair(nx, ny));
-                            }
+            for (int cx = 0; cx < width; cx++) {
+                for (int cy = 0; cy < height; cy++) {
+                    if (image.getPixel(cx, cy) > 0) {
+                        int[] ng = getNeighbors(image, cx, cy);
+                        int nc = getNC(ng);
+                        int ns = getNS(ng);
+                        if (2 <= nc && nc <= 6 && ns == 1 && (ng[0] == 0 || ng[6] == 0 || (ng[2] == 0 && ng[4] == 0))) {
+                            toDelete.add(new Pair(cx, cy));
+                            deleted++;
                         }
                     }
                 }
-                if (image.getPixel(cx, cy) > 0) {
-                    next.add(new Pair(cx, cy));
-                }
             }
-            next2.clear();
             for (Pair<Integer, Integer> pDel : toDelete) {
                 image.setPixel(pDel.first, pDel.second, 0);
             }
@@ -148,9 +103,8 @@ public class Skeleton {
     public static boolean isCorner(Image image, int x, int y) {
         if (image.getPixel(x, y) > 0) {
             int[] ng = getNeighbors(image, x, y);
-            int nc = getNC(ng);
             int ns = getNS(ng);
-            return nc <= 2 && ns == 1;
+            return ns == 1;
         }
         return false;
     }
