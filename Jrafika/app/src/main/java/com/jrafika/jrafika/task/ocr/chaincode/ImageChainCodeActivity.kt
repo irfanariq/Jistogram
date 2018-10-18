@@ -1,4 +1,4 @@
-package com.jrafika.jrafika.task.histogram
+package com.jrafika.jrafika.task.ocr.chaincode
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,11 +7,15 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.core.ImageEqualizer
+import com.jrafika.jrafika.core.ChainCodePredictor
+import com.jrafika.jrafika.core.ImageBitmapper
 import com.jrafika.jrafika.core.ImageGrayscaler
+import com.jrafika.jrafika.core.ImageStretcher
+import com.jrafika.jrafika.task.histogram.ImageTask
+import com.jrafika.jrafika.task.ocr.ImageBinaryOptionFragment
 import kotlinx.android.synthetic.main.task_layout.*
 
-class HistogramEqualizationActivity : BaseActivity() {
+class ImageChainCodeActivity: BaseActivity() {
 
     override val contentViewId: Int
         get() = R.layout.task_layout
@@ -19,34 +23,37 @@ class HistogramEqualizationActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setTitle(R.string.histogram_equalization_title)
+        setTitle(R.string.chain_code_title)
 
         val grayscaledImageFragment = ImageResultFragment()
-        val grayscaledHistogramFragment = DisplayHistogramFragment.newInstance(resources.getString(R.string.grayscaled_histogram))
-        val equalizedImageFragment = ImageResultFragment()
-        val equalizedHistogramFragment = DisplayHistogramFragment.newInstance(getString(R.string.equalized_histogram))
+        val blackWhiteOptionFragment = ImageBinaryOptionFragment()
+        val predictedImage = ImageResultFragment()
 
         val importImageFragment = ImportImageFragment()
         importImageFragment.imageImportedListener = {
-            ImageTask(grayscaledImageFragment,ImageGrayscaler(), listOf(grayscaledHistogramFragment))
-                    .then(ImageTask(equalizedImageFragment, ImageEqualizer(), listOf(equalizedHistogramFragment)))
+            ImageTask(grayscaledImageFragment, ImageGrayscaler())
+                    .then(ImageTask(blackWhiteOptionFragment, ImageBitmapper(125)))
                     .execute(it)
-            taskViewPager.setCurrentItem(1)
+            taskViewPager.setCurrentItem(2)
         }
 
-        taskViewPager.offscreenPageLimit = 5
+        blackWhiteOptionFragment.proceedFunction = { bwImage ->
+            ImageTask(predictedImage, ChainCodePredictor()).execute(bwImage)
+            taskViewPager.setCurrentItem(3)
+        }
+
+        taskViewPager.offscreenPageLimit = 4
         taskViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
                         grayscaledImageFragment,
-                        grayscaledHistogramFragment,
-                        equalizedImageFragment,
-                        equalizedHistogramFragment
+                        blackWhiteOptionFragment,
+                        predictedImage
                 )[p0]
             }
             override fun getCount(): Int {
-                return 5
+                return 4
             }
         }
         taskViewPager.setCurrentItem(0)

@@ -1,13 +1,13 @@
 package com.jrafika.jrafika.task.histogram
 
 import android.os.AsyncTask
-import com.jrafika.jrafika.ImageResultFragment
+import com.jrafika.jrafika.ImageDisplayer
 import com.jrafika.jrafika.core.Image
 import com.jrafika.jrafika.core.ImageProcessor
 import com.jrafika.jrafika.task.HistogramTask
 
 class ImageTask(
-        resultFragment: ImageResultFragment? = null,
+        resultFragment: ImageDisplayer? = null,
         processor: ImageProcessor? = null,
         histogramFragment: List<DisplayHistogramFragment>? = null,
         next: ImageTask? = null) : AsyncTask<Image, Unit, Image>() {
@@ -24,6 +24,9 @@ class ImageTask(
 
     override fun doInBackground(vararg img: Image?): Image {
         val imgPrimary = img[0]
+        if (resultFragment != null) {
+            resultFragment.setInput(imgPrimary!!)
+        }
         if (processor != null) {
             return processor.proceed(imgPrimary)
         } else {

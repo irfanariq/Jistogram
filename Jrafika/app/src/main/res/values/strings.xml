@@ -6,6 +6,8 @@
     <string name="histogram_title">Histogram</string>
     <string name="histogram_equalization_title">Histogram Equalization</string>
     <string name="linear_streching_title">Linear Streching</string>
+    <string name="chain_code_title">Chain Code</string>
+    <string name="image_skeleton_title">Image Skeleton</string>
 
     <string name="red_histogram">Red Histogram</string>
     <string name="green_histogram">Green Histogram</string>

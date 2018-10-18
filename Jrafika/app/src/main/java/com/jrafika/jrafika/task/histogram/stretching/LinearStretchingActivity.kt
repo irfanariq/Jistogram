@@ -11,12 +11,12 @@ import com.jrafika.jrafika.core.ImageGrayscaler
 import com.jrafika.jrafika.core.ImageStretcher
 import com.jrafika.jrafika.task.histogram.DisplayHistogramFragment
 import com.jrafika.jrafika.task.histogram.ImageTask
-import kotlinx.android.synthetic.main.histogram_layout.*
+import kotlinx.android.synthetic.main.task_layout.*
 
 class LinearStretchingActivity : BaseActivity() {
 
     override val contentViewId: Int
-        get() = R.layout.histogram_layout
+        get() = R.layout.task_layout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class LinearStretchingActivity : BaseActivity() {
         val importImageFragment = ImportImageFragment()
         importImageFragment.imageImportedListener = {
             ImageTask(grayscaledImageFragment, ImageGrayscaler(), listOf(grayscaledHistogramFragment)).execute(it)
-            histogramViewPager.setCurrentItem(1)
+            taskViewPager.setCurrentItem(1)
         }
 
         optionFragment.proceedFunction = { inputMin, inputMax, outputMin, outputMax ->
@@ -45,12 +45,12 @@ class LinearStretchingActivity : BaseActivity() {
                         ),
                         listOf(stretchedHistogramFragment)
                 ).execute(img)
-                histogramViewPager.setCurrentItem(5)
+                taskViewPager.setCurrentItem(5)
             }
         }
 
-        histogramViewPager.offscreenPageLimit = 6
-        histogramViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
+        taskViewPager.offscreenPageLimit = 6
+        taskViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
@@ -65,6 +65,6 @@ class LinearStretchingActivity : BaseActivity() {
                 return 6
             }
         }
-        histogramViewPager.setCurrentItem(0)
+        taskViewPager.setCurrentItem(0)
     }
 }

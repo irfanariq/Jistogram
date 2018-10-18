@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import com.jrafika.jrafika.core.Image
 
-open class ImageResultFragment: Fragment() {
+open class ImageResultFragment: Fragment(), ImageDisplayer {
 
     var resultImageView: ImageView? = null
     var copyImageButton: FloatingActionButton? = null
@@ -19,6 +19,8 @@ open class ImageResultFragment: Fragment() {
 
     var imageLoadedListener: ((Image) -> Unit)? = null
     var currentImage: Image? = null
+
+    override fun setInput(image: Image) {}
 
     fun setBitmap(bitmap: Bitmap) {
         currentImage = Image.fromBitmap(bitmap)
@@ -30,7 +32,7 @@ open class ImageResultFragment: Fragment() {
             imageLoadedListener!!(currentImage!!)
     }
 
-    fun setImage(image: Image) {
+    override fun setImage(image: Image) {
         currentImage = image
         copyImageButton!!.show()
         progressBar!!.visibility = View.INVISIBLE
@@ -44,7 +46,7 @@ open class ImageResultFragment: Fragment() {
         return currentImage
     }
 
-    fun setLoading() {
+    override fun setLoading() {
         progressBar!!.visibility = View.VISIBLE
         progressBar!!.invalidate()
     }

@@ -8,12 +8,12 @@ import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
 import com.jrafika.jrafika.core.ImageGrayscaler
-import kotlinx.android.synthetic.main.histogram_layout.*
+import kotlinx.android.synthetic.main.task_layout.*
 
 class HistogramActivity : BaseActivity() {
 
     override val contentViewId: Int
-        get() = R.layout.histogram_layout
+        get() = R.layout.task_layout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +37,11 @@ class HistogramActivity : BaseActivity() {
                     ImageGrayscaler(),
                     listOf(grayscaledHistogramFragment)
             )).execute(it)
-            histogramViewPager.setCurrentItem(1)
+            taskViewPager.setCurrentItem(1)
         }
 
-        histogramViewPager.offscreenPageLimit = 7
-        histogramViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
+        taskViewPager.offscreenPageLimit = 7
+        taskViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
@@ -56,6 +56,6 @@ class HistogramActivity : BaseActivity() {
                 return 6
             }
         }
-        histogramViewPager.setCurrentItem(0)
+        taskViewPager.setCurrentItem(0)
     }
 }

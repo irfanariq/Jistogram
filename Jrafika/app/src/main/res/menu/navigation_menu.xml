@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/task1MenuOption" android:title="@string/histogram_title"></item>
-    <item android:id="@+id/task2MenuOption" android:title="@string/histogram_equalization_title"></item>
-    <item android:id="@+id/task3MenuOption" android:title="@string/linear_streching_title"></item>
-    <item android:id="@+id/task4MenuOption" android:title="@string/histogram_specification_title"></item>
+    <group android:checkableBehavior="single" >
+        <item android:id="@+id/task1MenuOption" android:title="@string/histogram_title"></item>
+        <item android:id="@+id/task2MenuOption" android:title="@string/histogram_equalization_title"></item>
+        <item android:id="@+id/task3MenuOption" android:title="@string/linear_streching_title"></item>
+        <item android:id="@+id/task4MenuOption" android:title="@string/histogram_specification_title"></item>
+    </group>
+
+    <group android:checkableBehavior="single" >
+        <item android:id="@+id/task5MenuOption" android:title="@string/chain_code_title"></item>
+        <item android:id="@+id/task6MenuOption" android:title="@string/image_skeleton_title"></item>
+    </group>
 
 </menu>

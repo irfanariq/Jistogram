@@ -11,12 +11,12 @@ import com.jrafika.jrafika.core.ImageGrayscaler
 import com.jrafika.jrafika.core.ImageSpecification
 import com.jrafika.jrafika.task.histogram.DisplayHistogramFragment
 import com.jrafika.jrafika.task.histogram.ImageTask
-import kotlinx.android.synthetic.main.histogram_layout.*
+import kotlinx.android.synthetic.main.task_layout.*
 
 class HistogramSpecificationActivity : BaseActivity() {
 
     override val contentViewId: Int
-        get() = R.layout.histogram_layout
+        get() = R.layout.task_layout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class HistogramSpecificationActivity : BaseActivity() {
         val importImageFragment = ImportImageFragment()
         importImageFragment.imageImportedListener = {
             ImageTask(grayscaledImageFragment, ImageGrayscaler(), listOf(originalHistogramFragment)).execute(it)
-            histogramViewPager.setCurrentItem(1)
+            taskViewPager.setCurrentItem(1)
         }
 
         optionFragment.proceedFunction = { targetHistogram ->
@@ -47,12 +47,12 @@ class HistogramSpecificationActivity : BaseActivity() {
                         ImageSpecification(targetHistogram.toTypedArray()),
                         listOf(specifiedlHistogramFragment)
                 ).execute(img)
-                histogramViewPager.setCurrentItem(4)
+                taskViewPager.setCurrentItem(4)
             }
         }
 
-        histogramViewPager.offscreenPageLimit = 6
-        histogramViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
+        taskViewPager.offscreenPageLimit = 6
+        taskViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
@@ -67,6 +67,6 @@ class HistogramSpecificationActivity : BaseActivity() {
                 return 6
             }
         }
-        histogramViewPager.setCurrentItem(0)
+        taskViewPager.setCurrentItem(0)
     }
 }
