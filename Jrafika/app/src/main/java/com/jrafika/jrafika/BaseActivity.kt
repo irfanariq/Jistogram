@@ -13,6 +13,7 @@ import com.jrafika.jrafika.task.histogram.HistogramEqualizationActivity
 import com.jrafika.jrafika.task.histogram.specification.HistogramSpecificationActivity
 import com.jrafika.jrafika.task.histogram.stretching.LinearStretchingActivity
 import com.jrafika.jrafika.task.ocr.chaincode.ImageChainCodeActivity
+import com.jrafika.jrafika.task.ocr.skeleton.ImageSkeletonActivity
 import kotlinx.android.synthetic.main.navigation_layout.*
 
 
@@ -47,6 +48,8 @@ abstract open class BaseActivity : AppCompatActivity() {
                 intent = Intent(this, HistogramSpecificationActivity::class.java)
             } else if (it.itemId == R.id.task5MenuOption) {
                 intent = Intent(this, ImageChainCodeActivity::class.java)
+            } else if (it.itemId == R.id.task6MenuOption) {
+                intent = Intent(this, ImageSkeletonActivity::class.java)
             }
 
             if (intent != null) {

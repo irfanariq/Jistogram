@@ -91,22 +91,26 @@ public class Util {
         public Pair<Integer, Integer> upperBound;
         public Pair<Integer, Integer> lowerBound;
         public Pair<Integer, Integer> seedPoint;
+        public int n;
 
         public AreaBox(
                 Pair<Integer, Integer> upperBound,
                 Pair<Integer, Integer> lowerBound,
-                Pair<Integer, Integer> seedPoint
+                Pair<Integer, Integer> seedPoint,
+                int n
         ) {
             this.upperBound = upperBound;
             this.lowerBound = lowerBound;
             this.seedPoint = seedPoint;
+            this.n = n;
         }
 
         public AreaBox clone() {
             return new Util.AreaBox(
                     new Pair(upperBound.first, upperBound.second),
                     new Pair(lowerBound.first, lowerBound.second),
-                    new Pair(seedPoint.first, seedPoint.second)
+                    new Pair(seedPoint.first, seedPoint.second),
+                    n
             );
         }
     }
@@ -124,6 +128,7 @@ public class Util {
                     Pair<Integer, Integer> seedPoint = new Pair(x, y);
                     Pair<Integer, Integer> upperBound = new Pair<>(width, height);
                     Pair<Integer, Integer> lowerBound = new Pair<>(0, 0);
+                    int npoint = 0;
 
                     st.push(new Pair<>(x, y));
                     while (!st.empty()) {
@@ -132,6 +137,7 @@ public class Util {
                         int cy = topStack.second;
                         if (pixels[cy * width + cx] > 0) {
                             pixels[cy * width + cx] = 0;
+                            npoint++;
 
                             upperBound = new Pair(
                                     min(upperBound.first, cx),
@@ -157,7 +163,7 @@ public class Util {
                     int area = (lowerBound.second - upperBound.second)
                             * (lowerBound.first - upperBound.second);
                     if (thresholdArea < 0 || area >= thresholdArea) {
-                        result.add(new AreaBox(upperBound, lowerBound, seedPoint));
+                        result.add(new AreaBox(upperBound, lowerBound, seedPoint, npoint));
                     }
                 }
             }

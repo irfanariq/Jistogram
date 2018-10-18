@@ -72,5 +72,4 @@ public class ChainCode {
         return getImageChainCode(image, -1);
     }
 
-
 }

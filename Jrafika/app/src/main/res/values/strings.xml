@@ -26,5 +26,6 @@
     <string name="histogram_specification_title">Histogram Specification</string>
     <string name="equalized_histogram">Equalized Histogram</string>
     <string name="stretched_histogram">Stretched Histogram</string>
+    <string name="skeleton_title">Skeleton</string>
 
 </resources>
