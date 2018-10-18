@@ -61,7 +61,10 @@ public class Skeleton {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 if (image.getPixel(x, y) > 0) {
-                    next.add(new Pair(x, y));
+                    int[] ng = getNeighbors(image, x, y);
+                    if (ng[0] + ng[2] + ng[4] + ng[6] < 4) {
+                        next.add(new Pair(x, y));
+                    }
                 }
             }
         }
@@ -85,9 +88,11 @@ public class Skeleton {
                         for (int di = 0; di < 8; di++) {
                             int nx = cx + Util.DIRECTION_X[di];
                             int ny = cy + Util.DIRECTION_Y[di];
+                            ng = getNeighbors(image, nx, ny);
                             if (nx >= 0 && ny >= 0 &&
                                     nx < width && ny < height &&
-                                    image.getPixel(nx, ny) > 0) {
+                                    image.getPixel(nx, ny) > 0 &&
+                                    ng[0] + ng[2] + ng[4] + ng[6] < 4) {
                                 next2.add(new Pair(nx, ny));
                             }
                         }
@@ -117,9 +122,11 @@ public class Skeleton {
                         for (int di = 0; di < 8; di++) {
                             int nx = cx + Util.DIRECTION_X[di];
                             int ny = cy + Util.DIRECTION_Y[di];
+                            ng = getNeighbors(image, nx, ny);
                             if (nx >= 0 && ny >= 0 &&
                                     nx < width && ny < height &&
-                                    image.getPixel(nx, ny) > 0) {
+                                    image.getPixel(nx, ny) > 0 &&
+                                    ng[0] + ng[2] + ng[4] + ng[6] < 4) {
                                 next.add(new Pair(nx, ny));
                             }
                         }
