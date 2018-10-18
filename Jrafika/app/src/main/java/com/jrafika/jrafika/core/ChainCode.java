@@ -1,37 +1,33 @@
 package com.jrafika.jrafika.core;
 
-import android.util.Pair;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChainCode {
 
-    public static class Result {
-        public List<Integer> chain;
-        public Util.AreaBox areaBox;
+    public List<Integer> chain;
+    public Util.AreaBox areaBox;
 
-        public Result(List<Integer> chain, Util.AreaBox areaBox) {
-            this.chain = chain;
-            this.areaBox = areaBox;
-        }
-
-        @Override
-        protected Result clone() {
-            return new Result(
-                    new ArrayList(chain),
-                    areaBox.clone()
-            );
-        }
+    public ChainCode(List<Integer> chain, Util.AreaBox areaBox) {
+        this.chain = chain;
+        this.areaBox = areaBox;
     }
 
-    public static List<Result> getImageChainCode(Image image, int areaThreshold) {
+    @Override
+    protected ChainCode clone() {
+        return new ChainCode(
+                new ArrayList(chain),
+                areaBox.clone()
+        );
+    }
+
+    public static List<ChainCode> getImageChainCode(Image image, int areaThreshold) {
         image = image.clone();
         int width = image.getWidth();
         int height = image.getHeight();
         List<Util.AreaBox> floodFill = Util.imageFloodFill(image, areaThreshold);
 
-        List<Result> results = new ArrayList<>();
+        List<ChainCode> results = new ArrayList<>();
 
         boolean[] visited = new boolean[width * height];
         for (int i = 0; i < width * height; i++) {
@@ -66,13 +62,13 @@ public class ChainCode {
                 }
             }
             if (chain.size() > 0) {
-                results.add(new Result(chain, areaBox));
+                results.add(new ChainCode(chain, areaBox));
             }
         }
         return results;
     }
 
-    public static List<Result> getImageChainCode(Image image) {
+    public static List<ChainCode> getImageChainCode(Image image) {
         return getImageChainCode(image, -1);
     }
 

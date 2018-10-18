@@ -47,11 +47,11 @@ public class ChainCodePredictor implements ImageProcessor {
         );
     }
 
-    public static int getDiff(ChainCode.Result a, ChainCode.Result b) {
+    public static int getDiff(ChainCode a, ChainCode b) {
         return getDiff(a.chain, b.chain);
     }
 
-    public static int predict(ChainCode.Result a) {
+    public static int predict(ChainCode a) {
         if (a.chain.size() != 180) {
             a = stretchChainCode(a, 180);
         }
@@ -73,7 +73,7 @@ public class ChainCodePredictor implements ImageProcessor {
     }
 
 
-    public static ChainCode.Result stretchChainCode(ChainCode.Result a, int size) {
+    public static ChainCode stretchChainCode(ChainCode a, int size) {
         a = a.clone();
         List<Integer> newChain = new ArrayList<>();
         int oldSize = a.chain.size();
@@ -105,8 +105,8 @@ public class ChainCodePredictor implements ImageProcessor {
         Bitmap bm = image.toBitmap();
         Canvas canvas = new Canvas(bm);
 
-        List<ChainCode.Result> chainCodes = ChainCode.getImageChainCode(image, 100);
-        for (ChainCode.Result cc : chainCodes) {
+        List<ChainCode> chainCodes = ChainCode.getImageChainCode(image, 100);
+        for (ChainCode cc : chainCodes) {
             int prediction = predict(cc);
 
             Pair<Integer, Integer> lowerBound = cc.areaBox.lowerBound;
@@ -120,11 +120,11 @@ public class ChainCodePredictor implements ImageProcessor {
 
             paint = new Paint();
             paint.setColor(Color.RED);
-            paint.setTextSize(18);
+            paint.setTextSize(24);
             canvas.drawText(
                     prediction + "",
                     (upperBound.first + lowerBound.first) / 2,
-                    lowerBound.second,
+                    lowerBound.second + 30,
                     paint
             );
         }
