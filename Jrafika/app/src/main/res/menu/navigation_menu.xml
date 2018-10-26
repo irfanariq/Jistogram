@@ -11,6 +11,7 @@
     <group android:checkableBehavior="single" >
         <item android:id="@+id/task5MenuOption" android:title="@string/chain_code_title"></item>
         <item android:id="@+id/task6MenuOption" android:title="@string/image_skeleton_title"></item>
+        <item android:id="@+id/task7MenuOption" android:title="@string/image_handwriting_title"></item>
     </group>
 
 </menu>

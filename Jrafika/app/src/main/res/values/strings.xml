@@ -8,6 +8,7 @@
     <string name="linear_streching_title">Linear Streching</string>
     <string name="chain_code_title">Chain Code</string>
     <string name="image_skeleton_title">Image Skeleton</string>
+    <string name="image_handwriting_title">Image Handwriting</string>
 
     <string name="red_histogram">Red Histogram</string>
     <string name="green_histogram">Green Histogram</string>

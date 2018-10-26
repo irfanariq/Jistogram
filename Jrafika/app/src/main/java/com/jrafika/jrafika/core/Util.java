@@ -87,9 +87,7 @@ public class Util {
         return result;
     }
 
-    public static class AreaBox {
-        public Pair<Integer, Integer> upperBound;
-        public Pair<Integer, Integer> lowerBound;
+    public static class AreaBox extends BoxUtil.BoundingBox {
         public Pair<Integer, Integer> seedPoint;
         public int n;
 
@@ -99,8 +97,7 @@ public class Util {
                 Pair<Integer, Integer> seedPoint,
                 int n
         ) {
-            this.upperBound = upperBound;
-            this.lowerBound = lowerBound;
+            super(upperBound, lowerBound);
             this.seedPoint = seedPoint;
             this.n = n;
         }

@@ -127,8 +127,8 @@ public class SkeletonPredictor implements ImageProcessor {
             paint.setTextSize(24);
             canvas.drawText(
                     prediction + "",
-                    (upperBound.first + lowerBound.first) / 2,
-                    lowerBound.second + 20,
+                    upperBound.first,
+                    upperBound.second + 24,
                     paint
             );
         }

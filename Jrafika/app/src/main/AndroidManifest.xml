@@ -22,6 +22,7 @@
         <activity android:name="com.jrafika.jrafika.task.histogram.specification.HistogramSpecificationActivity" />
         <activity android:name=".task.ocr.chaincode.ImageChainCodeActivity" />
         <activity android:name=".task.ocr.skeleton.ImageSkeletonActivity" />
+        <activity android:name=".task.ocr.handwriting.ImageHandwritingActivity" />
     </application>
 
 </manifest>
