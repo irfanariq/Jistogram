@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import com.jrafika.jrafika.task.filters.medianfilter.MedianFilterActivity
 import com.jrafika.jrafika.task.histogram.HistogramActivity
 import com.jrafika.jrafika.task.histogram.HistogramEqualizationActivity
 import com.jrafika.jrafika.task.histogram.specification.HistogramSpecificationActivity
@@ -53,6 +54,8 @@ abstract open class BaseActivity : AppCompatActivity() {
                 intent = Intent(this, ImageSkeletonActivity::class.java)
             } else if (it.itemId == R.id.task7MenuOption) {
                 intent = Intent(this, ImageHandwritingActivity::class.java)
+            } else if (it.itemId == R.id.task8MenuOption) {
+                intent = Intent(this, MedianFilterActivity::class.java)
             }
 
             if (intent != null) {

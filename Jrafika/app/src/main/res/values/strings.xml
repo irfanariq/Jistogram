@@ -28,5 +28,8 @@
     <string name="equalized_histogram">Equalized Histogram</string>
     <string name="stretched_histogram">Stretched Histogram</string>
     <string name="skeleton_title">Skeleton</string>
+    <string name="median_filter_title">Median Filter</string>
+    <string name="gradient_operator_title">Gradient Operator</string>
+    <string name="difference_operator_title">Difference Operator</string>
 
 </resources>

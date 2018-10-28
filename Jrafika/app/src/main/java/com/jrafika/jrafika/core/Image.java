@@ -38,6 +38,10 @@ public class Image {
     }
 
     public int getPixel(int x, int y, int channel) {
+        if (x < 0 || x >= width || y < 0 || y >= height) {
+            return 0;
+        }
+
         int color = pixels[y * width + x];
         if (channel == 0) {
             switch (this.type) {

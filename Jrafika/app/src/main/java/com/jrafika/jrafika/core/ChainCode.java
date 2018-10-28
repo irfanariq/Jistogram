@@ -14,7 +14,7 @@ public class ChainCode {
     }
 
     @Override
-    protected ChainCode clone() {
+    public ChainCode clone() {
         return new ChainCode(
                 new ArrayList(chain),
                 areaBox.clone()

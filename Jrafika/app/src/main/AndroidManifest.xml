@@ -23,6 +23,7 @@
         <activity android:name=".task.ocr.chaincode.ImageChainCodeActivity" />
         <activity android:name=".task.ocr.skeleton.ImageSkeletonActivity" />
         <activity android:name=".task.ocr.handwriting.ImageHandwritingActivity" />
+        <activity android:name=".task.filters.medianfilter.MedianFilterActivity" />
     </application>
 
 </manifest>

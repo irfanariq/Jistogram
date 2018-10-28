@@ -14,4 +14,10 @@
         <item android:id="@+id/task7MenuOption" android:title="@string/image_handwriting_title"></item>
     </group>
 
+    <group android:checkableBehavior="single" >
+        <item android:id="@+id/task8MenuOption" android:title="@string/median_filter_title"></item>
+        <item android:id="@+id/task9MenuOption" android:title="@string/gradient_operator_title"></item>
+        <item android:id="@+id/task10MenuOption" android:title="@string/difference_operator_title"></item>
+    </group>
+
 </menu>
