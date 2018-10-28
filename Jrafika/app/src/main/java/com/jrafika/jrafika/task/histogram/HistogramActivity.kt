@@ -7,7 +7,7 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.core.ImageGrayscaler
+import com.jrafika.jrafika.processor.ImageGrayscaler
 import kotlinx.android.synthetic.main.task_layout.*
 
 class HistogramActivity : BaseActivity() {

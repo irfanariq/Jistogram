@@ -7,10 +7,9 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.core.ChainCodePredictor
-import com.jrafika.jrafika.core.ImageBitmapper
-import com.jrafika.jrafika.core.ImageGrayscaler
-import com.jrafika.jrafika.core.ImageStretcher
+import com.jrafika.jrafika.processor.ChainCodePredictor
+import com.jrafika.jrafika.processor.ImageBitmapper
+import com.jrafika.jrafika.processor.ImageGrayscaler
 import com.jrafika.jrafika.task.histogram.ImageTask
 import com.jrafika.jrafika.task.ocr.ImageBinaryOptionFragment
 import kotlinx.android.synthetic.main.task_layout.*

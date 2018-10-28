@@ -1,6 +1,9 @@
-package com.jrafika.jrafika.core;
+package com.jrafika.jrafika.processor;
 
 import android.util.Pair;
+
+import com.jrafika.jrafika.core.Image;
+import com.jrafika.jrafika.core.Util;
 
 import java.util.LinkedList;
 import java.util.List;

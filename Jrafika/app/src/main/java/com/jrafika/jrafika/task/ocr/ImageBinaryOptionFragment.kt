@@ -11,7 +11,7 @@ import android.widget.SeekBar
 import com.jrafika.jrafika.ImageDisplayer
 import com.jrafika.jrafika.R
 import com.jrafika.jrafika.core.Image
-import com.jrafika.jrafika.core.ImageBitmapper
+import com.jrafika.jrafika.processor.ImageBitmapper
 import com.jrafika.jrafika.task.histogram.ImageTask
 
 class ImageBinaryOptionFragment: Fragment(), ImageDisplayer {

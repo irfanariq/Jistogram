@@ -7,8 +7,8 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.core.ImageEqualizer
-import com.jrafika.jrafika.core.ImageGrayscaler
+import com.jrafika.jrafika.processor.ImageEqualizer
+import com.jrafika.jrafika.processor.ImageGrayscaler
 import kotlinx.android.synthetic.main.task_layout.*
 
 class HistogramEqualizationActivity : BaseActivity() {
@@ -28,7 +28,7 @@ class HistogramEqualizationActivity : BaseActivity() {
 
         val importImageFragment = ImportImageFragment()
         importImageFragment.imageImportedListener = {
-            ImageTask(grayscaledImageFragment,ImageGrayscaler(), listOf(grayscaledHistogramFragment))
+            ImageTask(grayscaledImageFragment, ImageGrayscaler(), listOf(grayscaledHistogramFragment))
                     .then(ImageTask(equalizedImageFragment, ImageEqualizer(), listOf(equalizedHistogramFragment)))
                     .execute(it)
             taskViewPager.setCurrentItem(1)

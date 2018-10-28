@@ -1,4 +1,4 @@
-package com.jrafika.jrafika.core;
+package com.jrafika.jrafika.processor;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,11 @@ import android.util.Log;
 import android.util.Pair;
 
 import com.jrafika.jrafika.R;
+import com.jrafika.jrafika.core.BoxUtil;
+import com.jrafika.jrafika.core.Image;
+import com.jrafika.jrafika.core.LoaderUtil;
+import com.jrafika.jrafika.core.Skeleton;
+import com.jrafika.jrafika.core.TextUtil;
 
 import org.apache.commons.math3.linear.ArrayRealVector;
 import org.apache.commons.math3.linear.MatrixUtils;

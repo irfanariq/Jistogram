@@ -3,7 +3,7 @@ package com.jrafika.jrafika.task.histogram
 import android.os.AsyncTask
 import com.jrafika.jrafika.ImageDisplayer
 import com.jrafika.jrafika.core.Image
-import com.jrafika.jrafika.core.ImageProcessor
+import com.jrafika.jrafika.processor.ImageProcessor
 import com.jrafika.jrafika.task.HistogramTask
 
 class ImageTask(

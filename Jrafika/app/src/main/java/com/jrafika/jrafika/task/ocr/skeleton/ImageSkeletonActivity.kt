@@ -7,7 +7,7 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.core.*
+import com.jrafika.jrafika.processor.*
 import com.jrafika.jrafika.task.histogram.ImageTask
 import com.jrafika.jrafika.task.ocr.ImageBinaryOptionFragment
 import kotlinx.android.synthetic.main.task_layout.*

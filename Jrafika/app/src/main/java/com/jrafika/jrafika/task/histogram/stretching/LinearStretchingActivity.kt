@@ -7,8 +7,8 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.core.ImageGrayscaler
-import com.jrafika.jrafika.core.ImageStretcher
+import com.jrafika.jrafika.processor.ImageGrayscaler
+import com.jrafika.jrafika.processor.ImageStretcher
 import com.jrafika.jrafika.task.histogram.DisplayHistogramFragment
 import com.jrafika.jrafika.task.histogram.ImageTask
 import kotlinx.android.synthetic.main.task_layout.*

@@ -1,10 +1,13 @@
-package com.jrafika.jrafika.core;
+package com.jrafika.jrafika.processor;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Pair;
+
+import com.jrafika.jrafika.core.ChainCode;
+import com.jrafika.jrafika.core.Image;
 
 import java.util.ArrayList;
 import java.util.List;

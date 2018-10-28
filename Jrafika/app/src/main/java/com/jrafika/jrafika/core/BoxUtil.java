@@ -18,7 +18,7 @@ public class BoxUtil {
         }
 
         @Override
-        protected BoundingBox clone() {
+        public BoundingBox clone() {
             return new BoundingBox(upperBound, lowerBound);
         }
 

@@ -1,9 +1,12 @@
-package com.jrafika.jrafika.core;
+package com.jrafika.jrafika.processor;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+
+import com.jrafika.jrafika.core.Image;
+import com.jrafika.jrafika.core.Skeleton;
 
 import java.util.List;
 

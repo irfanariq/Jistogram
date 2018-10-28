@@ -1,4 +1,8 @@
-package com.jrafika.jrafika.core;
+package com.jrafika.jrafika.processor;
+
+import com.jrafika.jrafika.core.Histogram;
+import com.jrafika.jrafika.core.Image;
+import com.jrafika.jrafika.processor.ImageProcessor;
 
 public class ImageSpecification implements ImageProcessor {
 
