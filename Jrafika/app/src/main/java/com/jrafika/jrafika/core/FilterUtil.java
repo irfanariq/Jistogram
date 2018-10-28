@@ -22,24 +22,32 @@ public class FilterUtil {
             throw new IllegalArgumentException("kernel size should be odd integer");
         }
 
-        Image result = image.clone();
+        double[][] result = new double[image.getHeight()][image.getWidth()];
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
-                float val = 0.0f;
+                double val = 0.0;
                 for (int i = 0; i < kheight; i++) {
                     for (int j = 0; j < kwidth; j++) {
                         int color = image.getPixel(
                                 x - (kwidth / 2) + j,
                                 y - (kheight / 2) + i
                         );
-                        val += color * kernel[i][j];
+                        double colorD = (double) color / 256.0;
+                        val += colorD * kernel[i][j];
                     }
                 }
-                result.setPixel(x, y, (int) max(0, min(255, floor(val))));
+                result[y][x] = val;
             }
         }
 
-        return result;
+        Image resultImage = image.clone();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                resultImage.setPixel(x, y, (int) (255.0 * max(0.0, min(1.0, result[y][x]))));
+            }
+        }
+
+        return resultImage;
     }
 
     public static Image sobelXFilter(Image image) {
