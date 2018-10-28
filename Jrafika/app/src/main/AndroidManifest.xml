@@ -24,6 +24,7 @@
         <activity android:name=".task.ocr.skeleton.ImageSkeletonActivity" />
         <activity android:name=".task.ocr.handwriting.ImageHandwritingActivity" />
         <activity android:name=".task.filters.medianfilter.MedianFilterActivity" />
+        <activity android:name=".task.filters.gradientoperator.GradientOperatorActivity" />
     </application>
 
 </manifest>
