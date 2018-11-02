@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentStatePagerAdapter
 import com.jrafika.jrafika.BaseActivity
+import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
+import com.jrafika.jrafika.processor.ImageGrayscaler
 import com.jrafika.jrafika.processor.MedianFilterer
 import com.jrafika.jrafika.task.histogram.ImageTask
 import kotlinx.android.synthetic.main.task_layout.*
@@ -21,22 +23,26 @@ class MedianFilterActivity : BaseActivity() {
         setTitle(R.string.median_filter_title)
 
         val importImageFragment = ImportImageFragment()
-        val medianFilterOptionFragment = MedianFilterOptionFragment()
+        val grayscaledImageFragment = ImageResultFragment()
+        val resultImageFragment = ImageResultFragment()
         importImageFragment.imageImportedListener = {
-            ImageTask(medianFilterOptionFragment, MedianFilterer(1)).execute(it)
-            taskViewPager.setCurrentItem(1)
+            ImageTask(grayscaledImageFragment, ImageGrayscaler())
+                    .then(ImageTask(resultImageFragment, MedianFilterer()))
+                    .execute(it)
+            taskViewPager.setCurrentItem(2)
         }
 
-        taskViewPager.offscreenPageLimit = 2
+        taskViewPager.offscreenPageLimit = 3
         taskViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
-                        medianFilterOptionFragment
+                        grayscaledImageFragment,
+                        resultImageFragment
                 )[p0]
             }
             override fun getCount(): Int {
-                return 2
+                return 3
             }
         }
         taskViewPager.setCurrentItem(0)

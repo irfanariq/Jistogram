@@ -76,42 +76,60 @@ public class FilterUtil {
         return result;
     }
 
-    public static Image medianFilter(Image image, int kernelSize) {
-        if (kernelSize % 2 == 0) {
-            throw new IllegalArgumentException("kernelSize should be odd integer");
-        }
-
-        int channel = 1;
+    public static Image medianFilter(Image image) {
         if (image.getType() == Image.IMAGE_RGB) {
-            channel = 3;
+            image = Util.imageRGBToGrayscale(image);
         }
-
         Image result = image.clone();
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
-                int[] val = new int[channel];
-                for (int c = 0; c < channel; c++) {
-                    List<Integer> values = new ArrayList<>();
-                    for (int i = 0; i < kernelSize * kernelSize; i++) {
-                        int color = image.getPixel(
-                                x - (kernelSize / 2) + i % kernelSize,
-                                y - (kernelSize / 2) + i / kernelSize,
-                                c
-                        );
-                        values.add(color);
-                    }
-                    values.sort(Integer::compare);
-                    val[c] = values.get(kernelSize * kernelSize / 2);
+                List<Integer> values = new ArrayList<>();
+                for (int i = 0; i < 9; i++) {
+                    int color = image.getPixel(x - 1 + i % 3,y - 1 + i / 3);
+                    values.add(color);
                 }
-
-                if (val.length == 1) {
-                    result.setPixel(x, y, val[0]);
-                } else {
-                    result.setPixel(x, y, Color.rgb(val[0], val[1], val[2]));
-                }
+                values.sort(Integer::compare);
+                result.setPixel(x, y, values.get(4));
             }
         }
+        return result;
+    }
 
+    public static Image differenceFilter(Image image) {
+        if (image.getType() == Image.IMAGE_RGB) {
+            image = Util.imageRGBToGrayscale(image);
+        }
+        Image result = image.clone();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int midColor = image.getPixel(x, y);
+                int targetColor = 0;
+                for (int i = 0; i < 9; i++) {
+                    int color = image.getPixel(x - 1 + i % 3,y - 1 + i / 3);
+                    targetColor = max(targetColor, abs(color - midColor));
+                }
+                result.setPixel(x, y, targetColor);
+            }
+        }
+        return result;
+    }
+
+    public static Image gradientOperatorFilter(Image image) {
+        if (image.getType() == Image.IMAGE_RGB) {
+            image = Util.imageRGBToGrayscale(image);
+        }
+        Image result = image.clone();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int targetColor = 0;
+                for (int i = 0; i < 4; i++) {
+                    int color1 = image.getPixel(x - 1 + i % 3,y - 1 + i / 3);
+                    int color2 = image.getPixel(x - 1 + 2 - (i % 3),y - 1 + 2 - (i / 3));
+                    targetColor = max(targetColor, abs(color1 - color2));
+                }
+                result.setPixel(x, y, targetColor);
+            }
+        }
         return result;
     }
 
