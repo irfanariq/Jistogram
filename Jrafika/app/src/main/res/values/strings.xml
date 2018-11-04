@@ -31,5 +31,7 @@
     <string name="median_filter_title">Median Filter</string>
     <string name="gradient_operator_title">Gradient Operator</string>
     <string name="difference_operator_title">Difference Operator</string>
+    <string name="average_filter_title">Average Filter</string>
+    <string name="custom_filter_title">Custom Filter</string>
 
 </resources>

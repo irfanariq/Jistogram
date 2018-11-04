@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
+import com.jrafika.jrafika.task.filters.averagefilter.AverageFilterActivity
+import com.jrafika.jrafika.task.filters.customfilter.CustomFilterActivity
 import com.jrafika.jrafika.task.filters.differenceoperator.DifferenceOperatorActivity
 import com.jrafika.jrafika.task.filters.gradientoperator.GradientOperatorActivity
 import com.jrafika.jrafika.task.filters.medianfilter.MedianFilterActivity
@@ -62,6 +64,10 @@ abstract open class BaseActivity : AppCompatActivity() {
                 intent = Intent(this, GradientOperatorActivity::class.java)
             } else if (it.itemId == R.id.task10MenuOption) {
                 intent = Intent(this, DifferenceOperatorActivity::class.java)
+            } else if (it.itemId == R.id.task11MenuOption) {
+                intent = Intent(this, AverageFilterActivity::class.java)
+            } else if (it.itemId == R.id.task12MenuOption) {
+                intent = Intent(this, CustomFilterActivity::class.java)
             }
 
             if (intent != null) {

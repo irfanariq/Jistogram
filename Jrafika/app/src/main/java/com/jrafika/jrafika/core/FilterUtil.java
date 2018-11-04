@@ -1,14 +1,9 @@
 package com.jrafika.jrafika.core;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.floor;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
@@ -90,6 +85,24 @@ public class FilterUtil {
                 }
                 values.sort(Integer::compare);
                 result.setPixel(x, y, values.get(4));
+            }
+        }
+        return result;
+    }
+
+    public static Image averageFilter(Image image) {
+        if (image.getType() == Image.IMAGE_RGB) {
+            image = Util.imageRGBToGrayscale(image);
+        }
+        Image result = image.clone();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                int sum = 0;
+                for (int i = 0; i < 9; i++) {
+                    int color = image.getPixel(x - 1 + i % 3,y - 1 + i / 3);
+                    sum += color;
+                }
+                result.setPixel(x, y, sum / 9);
             }
         }
         return result;

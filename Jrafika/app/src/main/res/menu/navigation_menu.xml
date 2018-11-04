@@ -18,6 +18,8 @@
         <item android:id="@+id/task8MenuOption" android:title="@string/median_filter_title"></item>
         <item android:id="@+id/task9MenuOption" android:title="@string/gradient_operator_title"></item>
         <item android:id="@+id/task10MenuOption" android:title="@string/difference_operator_title"></item>
+        <item android:id="@+id/task11MenuOption" android:title="@string/average_filter_title"></item>
+        <item android:id="@+id/task12MenuOption" android:title="@string/custom_filter_title"></item>
     </group>
 
 </menu>

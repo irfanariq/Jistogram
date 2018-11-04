@@ -24,8 +24,10 @@
         <activity android:name=".task.ocr.skeleton.ImageSkeletonActivity" />
         <activity android:name=".task.ocr.handwriting.ImageHandwritingActivity" />
         <activity android:name=".task.filters.medianfilter.MedianFilterActivity" />
+        <activity android:name=".task.filters.averagefilter.AverageFilterActivity" />
         <activity android:name=".task.filters.gradientoperator.GradientOperatorActivity" />
         <activity android:name=".task.filters.differenceoperator.DifferenceOperatorActivity" />
+        <activity android:name=".task.filters.customfilter.CustomFilterActivity" />
     </application>
 
 </manifest>
