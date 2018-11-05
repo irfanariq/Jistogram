@@ -34,4 +34,8 @@
     <string name="average_filter_title">Average Filter</string>
     <string name="custom_filter_title">Custom Filter</string>
 
+    <string name="sobel_horizontal">Sobel Horizontal</string>
+    <string name="sobel_vertical">Sobel Vertical</string>
+    <string name="prewitt">Prewitt</string>
+
 </resources>

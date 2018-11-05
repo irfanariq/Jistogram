@@ -19,20 +19,7 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/horizontal_sobel_matrix"
-            android:text="Horizontal Sobel"/>
-
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/vertical_sobel_matrix"
-            android:text="Vertical Sobel"/>
-
-    </RadioGroup>
+        android:layout_height="wrap_content"
+        android:id="@+id/matrix_template" />
 
 </LinearLayout>
