@@ -36,6 +36,7 @@
 
     <string name="sobel_horizontal">Sobel Horizontal</string>
     <string name="sobel_vertical">Sobel Vertical</string>
-    <string name="prewitt">Prewitt</string>
+    <string name="prewitt_horizontal">Prewitt Horizontal</string>
+    <string name="prewitt_vertical">Prewitt Vertical</string>
 
 </resources>

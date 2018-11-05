@@ -13,7 +13,8 @@ class CustomFilterOptionFragment: Fragment() {
 
     val SOBEL_HORIZONTAL_KERNEL = floatArrayOf(-1.0f, -2.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 2.0f, 1.0f)
     val SOBEL_VERTICAL_KERNEL = floatArrayOf(-1.0f, 0.0f, 1.0f, -2.0f, 0.0f, 2.0f, -1.0f, 0.0f, 1.0f)
-    val PREWITT_KERNEL = floatArrayOf(1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f)
+    val PREWITT_VERTICAL_KERNEL = floatArrayOf(1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f)
+    val PREWITT_HORIZONTAL_KERNEL = floatArrayOf(1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f, -1.0f)
     val FREI_CHEN_KERNEL = floatArrayOf()
 
     val textViewMatrix = ArrayList<EditText>()
@@ -61,7 +62,8 @@ class CustomFilterOptionFragment: Fragment() {
         val kernelMap = HashMap<Int, FloatArray>()
         kernelMap.put(R.string.sobel_horizontal, SOBEL_HORIZONTAL_KERNEL)
         kernelMap.put(R.string.sobel_vertical, SOBEL_VERTICAL_KERNEL)
-        kernelMap.put(R.string.prewitt, PREWITT_KERNEL)
+        kernelMap.put(R.string.prewitt_horizontal, PREWITT_HORIZONTAL_KERNEL)
+        kernelMap.put(R.string.prewitt_vertical, PREWITT_VERTICAL_KERNEL)
 
         for (name in kernelMap.keys) {
             val view = RadioButton(this.context)
