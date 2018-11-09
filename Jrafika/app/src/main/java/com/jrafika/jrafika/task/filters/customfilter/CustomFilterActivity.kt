@@ -8,6 +8,7 @@ import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
 import com.jrafika.jrafika.processor.Convoluter
+import com.jrafika.jrafika.processor.ConvoluterEdgeDetection
 import com.jrafika.jrafika.processor.ImageGrayscaler
 import com.jrafika.jrafika.task.histogram.ImageTask
 import kotlinx.android.synthetic.main.task_layout.*
@@ -33,11 +34,18 @@ class CustomFilterActivity: BaseActivity() {
                 val image = it
                 customFilterOptionFragment.proceedFunction = {
                     val kernel = arrayOf(
-                            floatArrayOf(it[0], it[1], it[2]),
-                            floatArrayOf(it[3], it[4], it[5]),
-                            floatArrayOf(it[6], it[7], it[8])
+                            arrayOf(
+                                floatArrayOf(it[0], it[1], it[2]),
+                                floatArrayOf(it[3], it[4], it[5]),
+                                floatArrayOf(it[6], it[7], it[8])
+                            ),
+                            arrayOf(
+                                floatArrayOf(it[9], it[10], it[11]),
+                                floatArrayOf(it[12], it[13], it[14]),
+                                floatArrayOf(it[15], it[16], it[17])
+                            )
                     )
-                    ImageTask(resultImageFragment, Convoluter(kernel)).execute(image)
+                    ImageTask(resultImageFragment, ConvoluterEdgeDetection(kernel)).execute(image)
                     taskViewPager.setCurrentItem(3)
                 }
             }

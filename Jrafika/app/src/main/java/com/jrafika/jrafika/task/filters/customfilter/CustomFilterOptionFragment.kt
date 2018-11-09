@@ -8,14 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import com.jrafika.jrafika.R
+import java.lang.Math.sqrt
 
 class CustomFilterOptionFragment: Fragment() {
 
-    val SOBEL_HORIZONTAL_KERNEL = floatArrayOf(-1.0f, -2.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 2.0f, 1.0f)
-    val SOBEL_VERTICAL_KERNEL = floatArrayOf(-1.0f, 0.0f, 1.0f, -2.0f, 0.0f, 2.0f, -1.0f, 0.0f, 1.0f)
-    val PREWITT_VERTICAL_KERNEL = floatArrayOf(1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f)
-    val PREWITT_HORIZONTAL_KERNEL = floatArrayOf(1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, -1.0f, -1.0f)
-    val FREI_CHEN_KERNEL = floatArrayOf()
+    val SOBEL_KERNEL = floatArrayOf(
+            -1.0f, -2.0f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 2.0f, 1.0f,
+            -1.0f, 0.0f, 1.0f, -2.0f, 0.0f, 2.0f, -1.0f, 0.0f, 1.0f
+    )
+    val PREWITT_KERNEL = floatArrayOf(
+            1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f, 1.0f, 0.0f, -1.0f,
+            -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 1.0f
+    )
+    val ROBERT_KERNEL = floatArrayOf(
+            1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+            0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f
+    )
+    val FREI_CHEN_KERNEL = floatArrayOf(
+            -1.0f, -sqrt(2.0).toFloat(), -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, sqrt(2.0).toFloat(), 1.0f,
+            -1.0f, 0.0f, 1.0f, -sqrt(2.0).toFloat(), 0.0f, sqrt(2.0).toFloat(), -1.0f, 0.0f, 1.0f
+    )
 
     val textViewMatrix = ArrayList<EditText>()
 
@@ -26,7 +38,7 @@ class CustomFilterOptionFragment: Fragment() {
     }
 
     fun setMatrix(kernel: FloatArray) {
-        for (i in 0..8) {
+        for (i in 0..17) {
             textViewMatrix.get(i).setText("" + kernel[i])
         }
     }
@@ -37,9 +49,8 @@ class CustomFilterOptionFragment: Fragment() {
 
         val matrixTemplateOptions = view.findViewById<RadioGroup>(R.id.matrix_template)
 
-        for (i in 0..8) {
+        for (i in 0..17) {
             val editText = EditText(this.context)
-            editText.inputType = InputType.TYPE_CLASS_NUMBER
             editText.setText("0.11")
             textViewMatrix.add(editText)
         }
@@ -60,10 +71,10 @@ class CustomFilterOptionFragment: Fragment() {
         }
 
         val kernelMap = HashMap<Int, FloatArray>()
-        kernelMap.put(R.string.sobel_horizontal, SOBEL_HORIZONTAL_KERNEL)
-        kernelMap.put(R.string.sobel_vertical, SOBEL_VERTICAL_KERNEL)
-        kernelMap.put(R.string.prewitt_horizontal, PREWITT_HORIZONTAL_KERNEL)
-        kernelMap.put(R.string.prewitt_vertical, PREWITT_VERTICAL_KERNEL)
+        kernelMap.put(R.string.sobel, SOBEL_KERNEL)
+        kernelMap.put(R.string.prewitt, PREWITT_KERNEL)
+        kernelMap.put(R.string.robert, ROBERT_KERNEL)
+        kernelMap.put(R.string.freichen, FREI_CHEN_KERNEL)
 
         for (name in kernelMap.keys) {
             val view = RadioButton(this.context)
@@ -79,8 +90,8 @@ class CustomFilterOptionFragment: Fragment() {
         matrixTemplateOptions.invalidate()
 
         proceedButton.setOnClickListener {
-            val kernel = FloatArray(9)
-            for (i in 0..8) {
+            val kernel = FloatArray(18)
+            for (i in 0..17) {
                 kernel[i] = textViewMatrix.get(i)!!.text.toString().toFloat()
             }
             if (proceedFunction != null) {

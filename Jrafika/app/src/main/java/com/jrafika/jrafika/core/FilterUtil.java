@@ -6,6 +6,7 @@ import java.util.List;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+import static java.lang.Math.sqrt;
 
 public class FilterUtil {
 
@@ -32,6 +33,44 @@ public class FilterUtil {
                     }
                 }
                 result[y][x] = val;
+            }
+        }
+
+        Image resultImage = image.clone();
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                resultImage.setPixel(x, y, (int) (255.0 * max(0.0, min(1.0, result[y][x]))));
+            }
+        }
+
+        return resultImage;
+    }
+
+    public static Image convoluteMag(Image image, float[][][] kernel) {
+        int kwidth = kernel[0][0].length;
+        int kheight = kernel[0].length;
+
+        if (kwidth % 2 == 0 || kheight % 2 == 0) {
+            throw new IllegalArgumentException("kernel size should be odd integer");
+        }
+
+        double[][] result = new double[image.getHeight()][image.getWidth()];
+        for (int x = 0; x < image.getWidth(); x++) {
+            for (int y = 0; y < image.getHeight(); y++) {
+                double val1 = 0.0;
+                double val2 = 0.0;
+                for (int i = 0; i < kheight; i++) {
+                    for (int j = 0; j < kwidth; j++) {
+                        int color = image.getPixel(
+                                x - (kwidth / 2) + j,
+                                y - (kheight / 2) + i
+                        );
+                        double colorD = (double) color / 256.0;
+                        val1 += colorD * kernel[0][i][j];
+                        val2 += colorD * kernel[1][i][j];
+                    }
+                }
+                result[y][x] = sqrt(val1 * val1 + val2 * val2);
             }
         }
 
