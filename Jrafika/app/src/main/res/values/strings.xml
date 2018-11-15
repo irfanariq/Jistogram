@@ -33,6 +33,7 @@
     <string name="difference_operator_title">Difference Operator</string>
     <string name="average_filter_title">Average Filter</string>
     <string name="custom_filter_title">Custom Filter</string>
+    <string name="face_localizer_title">Face Localizer</string>
 
     <string name="sobel">Sobel</string>
     <string name="prewitt">Prewitt</string>

@@ -22,4 +22,6 @@
         <item android:id="@+id/task12MenuOption" android:title="@string/custom_filter_title"></item>
     </group>
 
+    <item android:id="@+id/task13MenuOption" android:title="@string/face_localizer_title"></item>
+
 </menu>

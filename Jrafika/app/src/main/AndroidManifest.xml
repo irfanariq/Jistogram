@@ -28,6 +28,7 @@
         <activity android:name=".task.filters.gradientoperator.GradientOperatorActivity" />
         <activity android:name=".task.filters.differenceoperator.DifferenceOperatorActivity" />
         <activity android:name=".task.filters.customfilter.CustomFilterActivity" />
+        <activity android:name=".task.face.FaceLocalizerActivity" />
     </application>
 
 </manifest>
