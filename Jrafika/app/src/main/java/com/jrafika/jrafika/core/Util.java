@@ -170,4 +170,52 @@ public class Util {
         return imageFloodFill(image, -1);
     }
 
+    public static Image dilate(Image image, int kernel) {
+        image = image.clone();
+        for (int x = 0; x < image.getWidth(); x += kernel) {
+            for (int y = 0; y < image.getHeight(); y += kernel) {
+                int ma = -1;
+                for (int i = 0; i < kernel; i++) {
+                    for (int j = 0; j < kernel; j++) {
+                        ma = max(ma, image.getPixel(x + j, y + i));
+                    }
+                }
+                for (int i = 0; i < kernel; i++) {
+                    for (int j = 0; j < kernel; j++) {
+                        image.setPixel(x + j, y + i, ma);
+                    }
+                }
+            }
+        }
+        return image;
+    }
+
+    public static Image dilate(Image image) {
+        return dilate(image, 3);
+    }
+
+    public static Image erode(Image image, int kernel) {
+        image = image.clone();
+        for (int x = 0; x < image.getWidth(); x += kernel) {
+            for (int y = 0; y < image.getHeight(); y += kernel) {
+                int ma = 255;
+                for (int i = 0; i < kernel; i++) {
+                    for (int j = 0; j < kernel; j++) {
+                        ma = min(ma, image.getPixel(x + j, y + i));
+                    }
+                }
+                for (int i = 0; i < kernel; i++) {
+                    for (int j = 0; j < kernel; j++) {
+                        image.setPixel(x + j, y + i, ma);
+                    }
+                }
+            }
+        }
+        return image;
+    }
+
+    public static Image erode(Image image) {
+        return erode(image, 3);
+    }
+
 }

@@ -7,9 +7,8 @@ import com.jrafika.jrafika.BaseActivity
 import com.jrafika.jrafika.ImageResultFragment
 import com.jrafika.jrafika.ImportImageFragment
 import com.jrafika.jrafika.R
-import com.jrafika.jrafika.processor.AverageFilterer
 import com.jrafika.jrafika.processor.FaceLocalizer
-import com.jrafika.jrafika.processor.ImageGrayscaler
+import com.jrafika.jrafika.processor.SkinDetector
 import com.jrafika.jrafika.task.histogram.ImageTask
 import kotlinx.android.synthetic.main.task_layout.*
 
@@ -24,22 +23,25 @@ class FaceLocalizerActivity: BaseActivity() {
         setTitle(R.string.face_localizer_title)
 
         val importImageFragment = ImportImageFragment()
+        val skinifyImageFragment = ImageResultFragment()
         val resultImageFragment = ImageResultFragment()
         importImageFragment.imageImportedListener = {
+            ImageTask(skinifyImageFragment, SkinDetector()).execute(it)
             ImageTask(resultImageFragment, FaceLocalizer()).execute(it)
-            taskViewPager.setCurrentItem(1)
+            taskViewPager.setCurrentItem(2)
         }
 
-        taskViewPager.offscreenPageLimit = 2
+        taskViewPager.offscreenPageLimit = 3
         taskViewPager.adapter = object: FragmentStatePagerAdapter(supportFragmentManager) {
             override fun getItem(p0: Int): Fragment {
                 return arrayOf(
                         importImageFragment,
+                        skinifyImageFragment,
                         resultImageFragment
                 )[p0]
             }
             override fun getCount(): Int {
-                return 2
+                return 3
             }
         }
         taskViewPager.setCurrentItem(0)

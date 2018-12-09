@@ -6,9 +6,12 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Pair;
 
-import com.jrafika.jrafika.core.BoxUtil;
-import com.jrafika.jrafika.core.FaceUtil;
 import com.jrafika.jrafika.core.Image;
+import com.jrafika.jrafika.core.Util;
+
+import java.util.List;
+
+import static com.jrafika.jrafika.core.FaceUtil.getFace;
 
 public class FaceLocalizer implements ImageProcessor {
 
@@ -17,16 +20,18 @@ public class FaceLocalizer implements ImageProcessor {
         Bitmap bm = image.toBitmap();
         Canvas canvas = new Canvas(bm);
 
-        BoxUtil.BoundingBox boundingBox = FaceUtil.getFace(image);
+        List<Util.AreaBox> boundingBoxes = getFace(image);
 
-        Pair<Integer, Integer> lowerBound = boundingBox.lowerBound;
-        Pair<Integer, Integer> upperBound = boundingBox.upperBound;
+        for (Util.AreaBox area : boundingBoxes) {
+            Pair<Integer, Integer> upperBound = area.upperBound;
+            Pair<Integer, Integer> lowerBound = area.lowerBound;
 
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setColor(Color.GREEN);
-        paint.setStrokeWidth(3);
-        canvas.drawRect(upperBound.first, upperBound.second, lowerBound.first, lowerBound.second, paint);
+            Paint paint = new Paint();
+            paint.setStyle(Paint.Style.STROKE);
+            paint.setColor(Color.GREEN);
+            paint.setStrokeWidth(1);
+            canvas.drawRect(upperBound.first - 1, upperBound.second - 1, lowerBound.first, lowerBound.second, paint);
+        }
 
         return Image.fromBitmap(bm);
     }

@@ -1,7 +1,15 @@
 package com.jrafika.jrafika.core;
 
+import android.util.Log;
 import android.util.Pair;
 
+import java.util.List;
+
+import static com.jrafika.jrafika.core.ColorUtil.RGBToHSV;
+import static com.jrafika.jrafika.core.ColorUtil.RGBToYCB;
+import static com.jrafika.jrafika.core.Util.dilate;
+import static com.jrafika.jrafika.core.Util.imageFloodFill;
+import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
 public class FaceUtil {
@@ -35,37 +43,41 @@ public class FaceUtil {
         return sum / (double) n;
     }
 
-    public static BoxUtil.BoundingBox getFace(Image image) {
-        int[] col = new int[image.getWidth()];
-        int[] row = new int[image.getHeight()];
+    private static boolean isSkin(int r, int g, int b) {
+        ColorUtil.HSV hsv = RGBToHSV(r, g, b);
+        ColorUtil.YCB ycb = RGBToYCB(r, g, b);
+        float h = hsv.h;
+        float s = hsv.s;
+        float v = hsv.v;
+        int y = ycb.y;
+        int cr = ycb.cr;
+        int cb = ycb.cb;
+        if (r > 95 && g > 40 && b > 20 && r > g && r > b && abs(r - g) > 15) {
+            return (h >= 0 && h <=50.0f/360.0f && s >= 0.23 && s <= 0.68)
+            || (cr > 135 && cb > 58 && y > 80 && cr <= (1.5862 * cb) + 20 &&
+                    cr >= (0.3448 * cb) + 76.2069 && cr >= (-4.5652 * cb) + 234.5652 &&
+                    cr <= (-1.15 * cb) + 301.75 && cr <= (-2.2857 * cb) + 432.85);
+        }
+        return false;
+    }
+
+    public static Image skinify(Image image) {
+        Image result = Util.imageRGBToGrayscale(image);
         for (int y = 0; y < image.getHeight(); y++) {
             for (int x = 0; x < image.getWidth(); x++) {
-                double minDist = Double.POSITIVE_INFINITY;
-                for (int i = 0; i < FACE_REPRESENTATION.length; i++) {
-                    int temp1 = image.getPixel(x, y, 0) - FACE_REPRESENTATION[i][0];
-                    int temp2 = image.getPixel(x, y, 1) - FACE_REPRESENTATION[i][1];
-                    int temp3 = image.getPixel(x, y, 2) - FACE_REPRESENTATION[i][2];
-                    double dist = sqrt(temp1 * temp1 + temp2* temp2 + temp3 * temp3) / 390.0 * 255.0;
-                    if (minDist > dist) {
-                        minDist = dist;
-                    }
-                }
-                if (minDist >= 10) {
-                    col[x]++;
-                    row[y]++;
+                if (isSkin(image.getPixel(x, y, 0), image.getPixel(x, y, 1), image.getPixel(x, y, 2))) {
+                    result.setPixel(x, y, 255);
+                } else {
+                    result.setPixel(x, y, 0);
                 }
             }
         }
+        return result;
+    }
 
-        int colMean = (int) getMean(col);
-        int colWidth = (int) (sqrt(getVar(col)) * 0.75);
-        int rowMean = (int) getMean(row);
-        int rowWidth = (int) (sqrt(getVar(row)) * 0.75);
-
-        return new BoxUtil.BoundingBox(
-                new Pair<>(colMean - colWidth, rowMean - rowWidth),
-                new Pair<>(colMean + colWidth, rowMean + rowWidth)
-        );
+    public static List<Util.AreaBox> getFace(Image image) {
+        Image skinImage = dilate(skinify(image), 5);
+        return imageFloodFill(skinImage, 1024);
     }
 
 }
