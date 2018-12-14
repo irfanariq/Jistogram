@@ -39,5 +39,6 @@
     <string name="prewitt">Prewitt</string>
     <string name="robert">Robert</string>
     <string name="freichen">Frei-Chen</string>
+    <string name="face_recognizer_title">Face Recognizer</string>
 
 </resources>

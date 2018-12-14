@@ -23,5 +23,6 @@
     </group>
 
     <item android:id="@+id/task13MenuOption" android:title="@string/face_localizer_title"></item>
+    <item android:id="@+id/task14MenuOption" android:title="@string/face_recognizer_title"></item>
 
 </menu>

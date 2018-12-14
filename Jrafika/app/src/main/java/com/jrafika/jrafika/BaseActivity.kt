@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import com.jrafika.jrafika.task.face.FaceLocalizerActivity
+import com.jrafika.jrafika.task.face.FaceRecognizerActivity
 import com.jrafika.jrafika.task.filters.averagefilter.AverageFilterActivity
 import com.jrafika.jrafika.task.filters.customfilter.CustomFilterActivity
 import com.jrafika.jrafika.task.filters.differenceoperator.DifferenceOperatorActivity
@@ -71,6 +72,8 @@ abstract open class BaseActivity : AppCompatActivity() {
                 intent = Intent(this, CustomFilterActivity::class.java)
             } else if (it.itemId == R.id.task13MenuOption) {
                 intent = Intent(this, FaceLocalizerActivity::class.java)
+            } else if (it.itemId == R.id.task14MenuOption) {
+                intent = Intent(this, FaceRecognizerActivity::class.java)
             }
 
             if (intent != null) {
